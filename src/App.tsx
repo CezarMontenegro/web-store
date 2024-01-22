@@ -8,8 +8,6 @@ function App() {
       <main>
         
       </main>
-
-      {/* testando branchs */}
     </div>
   )
 }
