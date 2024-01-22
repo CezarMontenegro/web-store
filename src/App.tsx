@@ -1,14 +1,14 @@
-import { getCategories, getProductByQuery, getProductByCategory, getProductByCategoryAndQuery } from './services/api'
+import Header from './components/header/Header';
+import Main from './components/Main';
 
 import './App.css'
 
 function App() {
   return (
-    <div>
-      <main>
-        
-      </main>
-    </div>
+    <>
+      <Header />
+      <Main />
+    </>
   )
 }
 
