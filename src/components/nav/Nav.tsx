@@ -1,7 +1,11 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-function Nav() {
+interface Props {
+  getProductsByCategory: (categoryId: string) => Promise<void>;
+}
+
+function Nav({getProductsByCategory}: Props) {
 
   interface Category {
     id: string;
@@ -31,7 +35,7 @@ function Nav() {
     <ul>
       {categories.map((category) => {
         return (
-          <li onClick={() => getProductByCategory(category.id)}>{category.name}</li>
+          <li onClick={() => getProductsByCategory(category.id)}>{category.name}</li>
         )
       })}
     </ul>
