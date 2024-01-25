@@ -13,6 +13,7 @@ export const Container = styled.header`
   img {
     width: 100px;
     height: 50px;
+    cursor: pointer;
   }
 
   input[type=text] {
@@ -28,11 +29,27 @@ export const Container = styled.header`
     border-style: solid;
     border-color: rgba(0,0,0,0);
     border-width: 1.5px;
+    padding-left: 10px;
   }
 
   input[type=text]::placeholder {
     color: rgba(0,0,0,.5490196078);
     font-size: 16px;
-    font-weight: 400
+    font-weight: 400;
+  }
+
+  ul {
+    display: flex;
+    flex-direction: row;
+  }
+
+  li i {
+    font-size: 30px;
+    color: rgba(0,0,0,.7);
+    cursor: pointer;
+  }
+
+  li:last-child i {
+    margin-left: 40px;
   }
 `

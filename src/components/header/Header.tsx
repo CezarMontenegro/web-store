@@ -11,8 +11,10 @@ function Header() {
         maxLength={120}
       />
       <div>
-        <span>Login</span>
-        <span>Carrinho de compras</span>
+        <ul>
+          <li><i className="fa-solid fa-circle-user"></i></li>
+          <li><i className="fa-solid fa-cart-shopping"></i></li>
+        </ul>
       </div>
     </Container>
   )
