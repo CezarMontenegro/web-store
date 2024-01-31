@@ -1,12 +1,17 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Container } from './Nav.styles';
 
-function Nav() {
+interface Props {
+  getProductsByCategory: (categoryId: string) => Promise<void>;
+}
 
-  interface Category {
-    id: string;
-    name: string;
-  }
+interface Category {
+  id: string;
+  name: string;
+}
+
+function Nav({getProductsByCategory}: Props) {
 
   const [categories, setCategories] = useState<Category[]>([])
 
@@ -23,19 +28,17 @@ function Nav() {
     getCategories()
   },[])
 
-
-
   console.log(categories)
   return (
-    <nav>
+    <Container>
     <ul>
       {categories.map((category) => {
         return (
-          <li onClick={() => getProductByCategory(category.id)}>{category.name}</li>
+          <li onClick={() => getProductsByCategory(category.id)}>{category.name}</li>
         )
       })}
     </ul>
-    </nav>
+    </Container>
   )
 }
 
