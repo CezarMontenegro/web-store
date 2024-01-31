@@ -1,3 +1,5 @@
+import Card from "../card/Card"
+
 interface Props {
   categoryId: any[]
 }
@@ -8,11 +10,9 @@ function Main({categoryId}: Props) {
     <main>
       {categoryId.map((product) => {
         return (
-          <div>
-            <div>{product.title}</div>
-            <img src={product.thumbnail} alt="" />
-            <span>{product.price}</span>
-          </div>
+          <Card
+            
+          />
         )
       })}
     </main>

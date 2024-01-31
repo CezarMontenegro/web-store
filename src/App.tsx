@@ -4,6 +4,7 @@ import axios from 'axios';
 import Header from './components/header/Header';
 import Main from './components/main/Main';
 import Nav from './components/nav/Nav';
+import Footer from './components/footer/Footer';
 
 
 
@@ -24,8 +25,11 @@ function App() {
   return (
     <>
       <Header />
-      <Nav getProductsByCategory={getProductsByCategory}/>
-      <Main categoryId={categoryId}/>
+      <div>
+        <Nav getProductsByCategory={getProductsByCategory}/>
+        <Main categoryId={categoryId}/>
+      </div>
+      <Footer />
     </>
   )
 }
