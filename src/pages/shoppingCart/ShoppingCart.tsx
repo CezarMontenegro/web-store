@@ -1,4 +1,5 @@
 import { Container } from './ShoppingCart.styles';
+import { Link } from 'react-router-dom';
 
 function ShoppingCart() {
   return (
@@ -7,7 +8,7 @@ function ShoppingCart() {
         <i className="fa-solid fa-cart-shopping"></i>
         <h4>Carrinho de compras</h4>
       </div>
-      <i className="fa-solid fa-arrow-left"></i>
+      <Link to="/"><i className="fa-solid fa-arrow-left"></i></Link>
     </Container>
   )
 }

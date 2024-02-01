@@ -1,21 +1,25 @@
 import Card from "../card/Card"
 
+import { Container } from './Main.styles';
+
 interface Props {
-  categoryId: any[]
+  productsByCategory: any[]
 }
 
-function Main({categoryId}: Props) {
-  console.log(categoryId)
+function Main({productsByCategory}: Props) {
+  console.log(productsByCategory)
   return (
-    <main>
-      {categoryId.map((product) => {
+    <Container>
+      {productsByCategory.map((product) => {
         return (
           <Card
-            
+            title={product.title}
+            price={product.price}
+            img={product.thumbnail}
           />
         )
       })}
-    </main>
+    </Container>
   )
 }
 

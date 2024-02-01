@@ -2,14 +2,18 @@ import styled from 'styled-components';
 
 export const Container = styled.nav`
   height: 100%;
-  border: 1px solid red;
-  width: 200px;
-  margin-left: 10px;
+  width: 250px;
+  padding-left: 10px;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  background-color: #fff;
   
   p {
     cursor: pointer;
+  }
+
+  p:hover {
+    background-color: #e7e7e7;
   }
   `

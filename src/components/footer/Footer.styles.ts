@@ -7,6 +7,4 @@ export const Container = styled.footer`
   width: 100%;
   text-align: center;
   line-height: 50px;
-  position: absolute;
-  bottom:0 ;
 `

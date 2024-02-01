@@ -1,18 +1,20 @@
 import { Container } from './Card.styles';
 
 interface Props {
-  name: string;
+  title: string;
   price: number;
   img: string;
 }
 
-function Card({ name, price, img }: Props) {
+function Card({title, price, img }: Props) {
   return (
     <Container>
-      <div>{name}</div>
       <div>
-        <img src={img} alt="" />
-        <span>{price}</span>
+        <div className="img">
+          <img src={img} alt={title}/>
+        </div>
+        <div className="title">{title}</div>
+        <div className="price">R$ {price}</div>
       </div>
     </Container>
   )

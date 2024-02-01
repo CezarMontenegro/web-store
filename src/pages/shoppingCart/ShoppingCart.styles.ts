@@ -23,4 +23,8 @@ export const Container = styled.header`
     cursor: pointer;
     margin-right: 20px;
   }
+
+  a:visited {
+    color: #000;
+  }
 `

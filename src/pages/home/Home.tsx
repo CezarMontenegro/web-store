@@ -11,12 +11,12 @@ import Footer from '../../components/footer/Footer';
 import { Container } from './Home.styles';
 
 function Home() {
-    const [categoryId, setCategoryId] = useState<any[]>([]);
+    const [productsByCategory, setProductsByCategory] = useState<any[]>([]);
 
   const getProductsByCategory = async (CATEGORY_ID: string) => {
     try {
       const response = await axios.get(`https://api.mercadolibre.com/sites/MLB/search?category=${CATEGORY_ID}`);
-      setCategoryId(response.data.results);
+      setProductsByCategory(response.data.results);
     } catch (error) {
       console.error(error)
     }
@@ -27,7 +27,7 @@ function Home() {
       <Header />
       <Container>
         <Nav getProductsByCategory={getProductsByCategory}/>
-        <Main categoryId={categoryId}/>
+        <Main productsByCategory={productsByCategory}/>
       </Container>
       <Footer />
     </>
