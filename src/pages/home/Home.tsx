@@ -8,7 +8,7 @@ import Footer from '../../components/footer/Footer';
 
 
 
-import './Home.styles.css';
+import { Container } from './Home.styles';
 
 function Home() {
     const [categoryId, setCategoryId] = useState<any[]>([]);
@@ -25,10 +25,10 @@ function Home() {
   return (
     <>
       <Header />
-      <div>
+      <Container>
         <Nav getProductsByCategory={getProductsByCategory}/>
         <Main categoryId={categoryId}/>
-      </div>
+      </Container>
       <Footer />
     </>
   )

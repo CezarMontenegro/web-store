@@ -31,13 +31,11 @@ function Nav({getProductsByCategory}: Props) {
   console.log(categories)
   return (
     <Container>
-    <ul>
       {categories.map((category) => {
         return (
-          <li onClick={() => getProductsByCategory(category.id)}>{category.name}</li>
+          <p onClick={() => getProductsByCategory(category.id)}>{category.name}</p>
         )
       })}
-    </ul>
     </Container>
   )
 }
