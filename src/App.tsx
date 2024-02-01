@@ -3,17 +3,17 @@ import { Routes, Route } from 'react-router-dom';
 import Home from './pages/home/Home';
 import ShoppingCart from './pages/shoppingCart/ShoppingCart';
 
-import './App.css'
+import { Container } from './App.styles';
 
 function App() {
 
   return (
-    <div>
+    <Container>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/shoppingCart" element={<ShoppingCart />} />
       </Routes>
-    </div>
+    </Container>
   )
 }
 
