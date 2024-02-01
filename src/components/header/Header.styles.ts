@@ -4,11 +4,10 @@ export const Container = styled.header`
   display: flex;
   height: 50px;
   width: 100%;
-  padding: 0 15%;
-  border: 1px solid red;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   box-sizing: border-box;
+  background-color: #ffe600;
   
   img {
     width: 100px;
@@ -38,18 +37,20 @@ export const Container = styled.header`
     font-weight: 400;
   }
 
-  ul {
+  .nav-header {
     display: flex;
     flex-direction: row;
+    width: 150px;
   }
 
-  li i {
+  a:visited {
+    color: #000;
+  }
+
+  i {
     font-size: 30px;
-    color: rgba(0,0,0,.7);
+    margin-left: 20px;
+    margin-right: 20px;
     cursor: pointer;
-  }
-
-  li:last-child i {
-    margin-left: 40px;
   }
 `
