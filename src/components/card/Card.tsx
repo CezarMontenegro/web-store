@@ -1,12 +1,22 @@
+import { useState } from 'react';
 import { Container } from './Card.styles';
 
+
 interface Props {
-  title: string;
-  price: number;
   img: string;
+  title: string ;
+  originalPrice: number;
+  price: number;
+  shipping: boolean;
 }
 
-function Card({title, price, img }: Props) {
+function Card({img, title, originalPrice, price, shipping }: Props) {
+  function calculateDiscount() {
+    if(originalPrice) {
+      return (((originalPrice / price) - 1) * 100).toFixed(2);
+    }
+  }
+
   return (
     <Container>
       <div>
@@ -14,7 +24,14 @@ function Card({title, price, img }: Props) {
           <img src={img} alt={title}/>
         </div>
         <div className="title">{title}</div>
-        <div className="price">R$ {price}</div>
+        <div className="original-price">
+          <span>{originalPrice && `R$ ${originalPrice.toFixed(2)}`}</span>
+        </div>
+        <div className="price-container">
+          R$ {price.toFixed(2)}
+          <span>{originalPrice && `${calculateDiscount()}% OFF`}</span>
+        </div>
+        <div className="shipping">{shipping && "Frete grátis" }</div>
       </div>
     </Container>
   )

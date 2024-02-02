@@ -6,6 +6,14 @@ export const Container = styled.div`
   background-color: #fff;
   margin: 10px;
   border-radius: 10px;
+  cursor: pointer;
+  transition: .3s;
+  border: 1px solid #d0c7c7;
+
+  &:hover {
+  box-shadow: 0 20px 20px 0 rgba(185,185,185);
+}
+
 
   .img {
     width: 100%;
@@ -17,7 +25,7 @@ export const Container = styled.div`
     align-items: center;
   }
 
-  img {
+  .img img {
     width: 80%;
     height: 80%;
   }
@@ -32,12 +40,36 @@ export const Container = styled.div`
     margin-bottom: 10px;
   }
 
-  .price {
+  .original-price {
+    padding: 0 10px;
+    color: #5e5e5e;
+    font-size: 12px;
+    text-decoration: line-through;
+  }
+
+  .price-container {
     height: 30px;
     padding: 0 10px;
-    text-align: left;
     color: #0e0e0e;
-    font-size: 24px;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    font-weight: bolder;
+    margin-bottom: 5px;
+  }
+
+  .price-container span {
+    margin-left: 10px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #54aa4b;
+  }
+
+  .shipping {
+    padding: 0 10px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #54aa4b;
   }
 
 

@@ -28,7 +28,6 @@ function Nav({getProductsByCategory}: Props) {
     getCategories()
   },[])
 
-  console.log(categories)
   return (
     <Container>
       {categories.map((category) => {

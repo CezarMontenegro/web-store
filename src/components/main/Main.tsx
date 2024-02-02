@@ -13,9 +13,11 @@ function Main({productsByCategory}: Props) {
       {productsByCategory.map((product) => {
         return (
           <Card
-            title={product.title}
-            price={product.price}
             img={product.thumbnail}
+            title={product.title}
+            originalPrice={product.original_price}
+            price={product.price}
+            shipping={product.shipping.free_shipping}
           />
         )
       })}
