@@ -10,7 +10,12 @@ function Main({productsByCategory}: Props) {
   console.log(productsByCategory)
   return (
     <Container>
-      {productsByCategory.map((product) => {
+      {!productsByCategory.length && (
+        <div>
+          Digite o nome de um produto ou escolha uma categoria.
+        </div>
+      )}
+      {(productsByCategory.length > 0) && productsByCategory.map((product) => {
         return (
           <Card
             img={product.thumbnail}
