@@ -1,5 +1,6 @@
-import { Container } from './Header.styles';
 import { Link } from 'react-router-dom';
+
+import { Container } from './Header.styles';
 
 function Header() {
   return (
