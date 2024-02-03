@@ -6,16 +6,7 @@ import Main from '../../components/main/Main';
 import Nav from '../../components/nav/Nav';
 import Footer from '../../components/footer/Footer';
 
-import {
-  getCategories,
-  getProductByCategory
-} from '../../services/api';
-
 import { Container } from './Home.styles';
-
-interface Props {
-  getCatego
-}
 
 export interface Category {
   id: string;
