@@ -11,9 +11,17 @@ interface Category {
   name: string;
 }
 
+interface ProductsByCategory {
+  thumbnail: string;
+  title: string ;
+  original_price: number;
+  price: number;
+  shipping: {free_shipping: boolean};
+}
+
 interface APIContextData {
-  productsByCategory: any[];
-  setProductsByCategory: Dispatch<SetStateAction<any[]>>
+  productsByCategory: ProductsByCategory[];
+  setProductsByCategory: Dispatch<SetStateAction<ProductsByCategory[]>>
   categories: Category[];
   setCategories: Dispatch<SetStateAction<Category[]>>;
   getCategories: () => Promise<void>;
@@ -26,7 +34,7 @@ export const APIContext = createContext({} as APIContextData);
 //PROVIDER 
 function APIContextProvider({children}: Props) {
   //ESTADOS
-  const [productsByCategory, setProductsByCategory] = useState<any[]>([]);
+  const [productsByCategory, setProductsByCategory] = useState<ProductsByCategory[]>([]);
   const [categories, setCategories] = useState<Category[]>([])
 
   //FUNCOES
