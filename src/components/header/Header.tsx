@@ -8,17 +8,21 @@ import { Container } from './Header.styles';
 function Header() {
   const [query, setQuery] = useState<string>('');
 
-  const { categoryId, setWasFirstSearchMade, getProductByQuery, getProductByCategoryAndQuery } = useContext(APIContext);
+  const { categoryId, setWasFirstSearchMade, setProductsList, getProductByQuery, getProductByCategoryAndQuery } = useContext(APIContext);
+
+  function handleLogo() {
+    setWasFirstSearchMade(false);
+    setProductsList([]);
+  }
 
   function handleQuery() {
     categoryId.length ? getProductByCategoryAndQuery(categoryId, query) : getProductByQuery(query);
     setWasFirstSearchMade(true);
   }
   
-
   return (
     <Container>
-      <img src="../../public/mercado-livre.svg" alt="logo" />
+      <img src="../../public/mercado-livre.svg" alt="logo" onClick={handleLogo}/>
       <div className='search-container'>
         <input
           type="text"

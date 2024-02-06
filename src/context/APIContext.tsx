@@ -12,6 +12,7 @@ interface Category {
 }
 
 interface ProductsList {
+  id: number;
   thumbnail: string;
   title: string ;
   original_price: number;

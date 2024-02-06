@@ -24,6 +24,7 @@ function Main() {
       {(productsList.length > 0) && productsList.map((product) => {
         return (
           <Card
+            id={product.id}
             img={product.thumbnail}
             title={product.title}
             originalPrice={product.original_price}

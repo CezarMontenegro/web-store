@@ -77,8 +77,6 @@ export const Container = styled.header`
     font-weight: 400;
   }
 
-
-
   .nav-header {
     display: flex;
     flex-direction: row;
