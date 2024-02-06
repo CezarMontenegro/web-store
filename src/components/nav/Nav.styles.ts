@@ -14,7 +14,6 @@ export const Container = styled.nav`
   }
 
   p:hover {
-    background-color: #e7e7e7;
     font-weight: bold;
   }
 `
