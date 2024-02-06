@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 
-import { APIContext } from '../../context/Context';
+import { APIContext } from '../../context/APIContext';
 
 import { Container } from './Nav.styles';
 

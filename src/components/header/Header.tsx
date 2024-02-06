@@ -1,17 +1,18 @@
 import { useContext, useState  } from 'react';
 import { Link } from 'react-router-dom';
 
-import { APIContext } from '../../context/Context';
+import { APIContext } from '../../context/APIContext';
 
 import { Container } from './Header.styles';
 
 function Header() {
   const [query, setQuery] = useState<string>('');
 
-  const { categoryId, getProductByQuery, getProductByCategoryAndQuery } = useContext(APIContext);
+  const { categoryId, setWasFirstSearchMade, getProductByQuery, getProductByCategoryAndQuery } = useContext(APIContext);
 
   function handleQuery() {
     categoryId.length ? getProductByCategoryAndQuery(categoryId, query) : getProductByQuery(query);
+    setWasFirstSearchMade(true);
   }
   
 
