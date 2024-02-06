@@ -24,8 +24,12 @@ interface APIContextData {
   setProductsByCategory: Dispatch<SetStateAction<ProductsByCategory[]>>
   categories: Category[];
   setCategories: Dispatch<SetStateAction<Category[]>>;
+  categoryId: string;
+  setCategoryId: Dispatch<SetStateAction<string>>;
   getCategories: () => Promise<void>;
   getProductsByCategory: (CATEGORY_ID: string) => Promise<void>;
+  getProductByQuery: (QUERY: string) => Promise<void>;
+  getProductByCategoryAndQuery: (CATEGORY_ID: string, QUERY: string) => Promise<void>;
 }
 
 //CRIAÇÃO DO CONTEXTO
@@ -35,7 +39,8 @@ export const APIContext = createContext({} as APIContextData);
 function APIContextProvider({children}: Props) {
   //ESTADOS
   const [productsByCategory, setProductsByCategory] = useState<ProductsByCategory[]>([]);
-  const [categories, setCategories] = useState<Category[]>([])
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [categoryId, setCategoryId] = useState<string>('');
 
   //FUNCOES
   const getCategories = async () => {
@@ -51,8 +56,29 @@ function APIContextProvider({children}: Props) {
     try {
       const response = await axios.get(`https://api.mercadolibre.com/sites/MLB/search?category=${CATEGORY_ID}`);
       setProductsByCategory(response.data.results);
+      setCategoryId(CATEGORY_ID);
     } catch (error) {
       console.error(error)
+    }
+  }
+
+  const getProductByQuery = async (QUERY: string) => {
+    try {
+      const response = await axios(`https://api.mercadolibre.com/sites/MLB/search?q=${QUERY}`);
+      setProductsByCategory(response.data.results);
+    } catch (error) {
+      console.error('Erro ao obter produtos por consulta:', error);
+      throw error;
+    }
+  }
+
+  const getProductByCategoryAndQuery = async (CATEGORY_ID: string, QUERY: string) => {
+    try {
+      const response = await axios(`https://api.mercadolibre.com/sites/MLB/search?category=${CATEGORY_ID}&q=${QUERY}`);
+      setProductsByCategory(response.data.results);
+    } catch (error) {
+      console.error('Erro ao obter produtos por categoria e consulta:', error);
+      throw error;
     }
   }
 
@@ -61,8 +87,12 @@ function APIContextProvider({children}: Props) {
     setProductsByCategory,
     categories,
     setCategories,
+    categoryId,
+    setCategoryId,
     getCategories,
     getProductsByCategory,
+    getProductByQuery,
+    getProductByCategoryAndQuery,
   }
 
   return (

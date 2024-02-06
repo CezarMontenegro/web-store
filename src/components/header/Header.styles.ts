@@ -15,20 +15,60 @@ export const Container = styled.header`
     cursor: pointer;
   }
 
-  input[type=text] {
+  .search-container {
+    height: 30px;
+    width: 60%;
+    display: flex;
+    position: relative;
+  }
+
+  .search-container button {
+    position: absolute;
+    top: 2px;
+    right: 3px;
+    height: 26px;
+    width: 30px;
+    background-color: #fff;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    background-color: #fff;
+    display: flex;
+    border-style: solid;
+    border-color: rgba(0,0,0,0);
+    border-width: 1.5px;
+    box-sizing: border-box;
+    cursor: pointer;
+    border-left: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .search-container button i {
+    font-size: 16px;
+    margin: 0px;    
+  }
+
+  .search-container input[type=text] {
+    height: 100%;
+    width: 100%;
     color: rgba(0,0,0,.8980392157);
     font-size: 16px;
     margin: 0;
-    border-radius: 2px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
     background-color: #fff;
     display: flex;
     box-shadow: 0 1px 2px 0 rgba(0,0,0,.2);
-    height: 30px;
-    width: 60%;
     border-style: solid;
     border-color: rgba(0,0,0,0);
     border-width: 1.5px;
     padding-left: 10px;
+    box-sizing: border-box;
   }
 
   input[type=text]::placeholder {
@@ -36,6 +76,8 @@ export const Container = styled.header`
     font-size: 16px;
     font-weight: 400;
   }
+
+
 
   .nav-header {
     display: flex;
