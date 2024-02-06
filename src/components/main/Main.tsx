@@ -1,13 +1,13 @@
-import Card from "../card/Card"
+import { useContext } from "react";
+
+import Card from "../card/Card";
+
+import { APIContext } from "../../context/Context";
 
 import { Container } from './Main.styles';
 
-interface Props {
-  productsByCategory: any[]
-}
-
-function Main({productsByCategory}: Props) {
-  console.log(productsByCategory)
+function Main() {
+  const { productsByCategory } = useContext(APIContext)
   return (
     <Container>
       {!productsByCategory.length && (

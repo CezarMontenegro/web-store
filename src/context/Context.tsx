@@ -1,10 +1,14 @@
 import {createContext, useState, ReactNode, Dispatch, SetStateAction } from "react";
 import axios from 'axios';
-import { Category } from "../pages/home/Home";
 
 //INTERFACES
 interface Props {
   children: ReactNode;
+}
+
+interface Category {
+  id: string;
+  name: string;
 }
 
 interface APIContextData {
