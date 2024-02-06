@@ -1,13 +1,12 @@
-import { Category } from '../../pages/home/Home';
+import { useContext } from 'react';
+
+import { APIContext } from '../../context/Context';
 
 import { Container } from './Nav.styles';
 
-interface Props {
-  categories: Category[];
-  getProductsByCategory: (categoryId: string) => Promise<void>;
-}
+function Nav() {
+  const {categories, getProductsByCategory} = useContext(APIContext);
 
-function Nav({categories, getProductsByCategory}: Props) {
   return (
     <Container>
       {categories.map((category) => {

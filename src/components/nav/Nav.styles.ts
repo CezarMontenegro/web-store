@@ -17,4 +17,4 @@ export const Container = styled.nav`
     background-color: #e7e7e7;
     font-weight: bold;
   }
-  `
+`
