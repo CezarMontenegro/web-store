@@ -1,15 +1,31 @@
-import { Container } from './ShoppingCart.styles';
 import { Link } from 'react-router-dom';
 
+import { useContext } from 'react';
+
+import { APIContext } from '../../context/APIContext';
+
+import { Container } from './ShoppingCart.styles';
+
 function ShoppingCart() {
+  const { setWasFirstSearchMade, setProductsList } = useContext(APIContext);
+
+  function handleLogo() {
+    setWasFirstSearchMade(false);
+    setProductsList([]);
+
+  }
   return (
     <Container>
-      <div className='title'>
-        <i className="fa-solid fa-cart-shopping"></i>
-        <h4>Carrinho de compras</h4>
-      </div>
-      <Link to="/"><i className="fa-solid fa-arrow-left"></i></Link>
-    </Container>
+      <header>
+        <div className='title'>
+          <Link to="/"><img src="../../public/mercado-livre.svg" alt="logo" onClick={handleLogo}/></Link>
+          <h4>Shopping Cart</h4>
+        </div>
+        <div className='nav'>
+          <Link to="/"><i className="fa-solid fa-arrow-left"></i></Link>
+        </div>
+      </header>
+  </Container>
   )
 }
 

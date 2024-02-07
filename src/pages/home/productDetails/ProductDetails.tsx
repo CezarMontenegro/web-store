@@ -1,16 +1,34 @@
 import { Link } from 'react-router-dom';
 
+import { useContext } from 'react';
+
+import { APIContext } from '../../../context/APIContext';
+
+import { Container } from './ProductDetails.styles';
+
 function ProductDetails() {
+
+  const { setWasFirstSearchMade, setProductsList } = useContext(APIContext);
+
+  function handleLogo() {
+    setWasFirstSearchMade(false);
+    setProductsList([]);
+
+  }
+
   return (
-    <div>
+    <Container>
       <header>
-        <div className='title'>
-          <i className="fa-solid fa-cart-shopping"></i>
-          <h4>Carrinho de compras</h4>
+        <div className="title">
+          <Link to="/"><img src="../../public/mercado-livre.svg" alt="logo" onClick={handleLogo}/></Link>
+          <h4>Product Details</h4>
         </div>
-        <Link to="/"><i className="fa-solid fa-arrow-left"></i></Link>
+        <div className='nav'>
+          <Link to="/shoppingCart"><i className="fa-solid fa-cart-shopping"></i></Link>
+          <Link to="/"><i className="fa-solid fa-arrow-left"></i></Link>
+        </div>
       </header>
-    </div>
+    </Container>
   )
 }
 

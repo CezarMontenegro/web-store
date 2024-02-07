@@ -4,10 +4,11 @@ export const Container = styled.header`
   display: flex;
   height: 50px;
   width: 100%;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   box-sizing: border-box;
   background-color: #ffe600;
+  padding: 0 40px;
   
   img {
     width: 100px;
@@ -89,8 +90,7 @@ export const Container = styled.header`
 
   i {
     font-size: 30px;
-    margin-left: 20px;
-    margin-right: 20px;
+    margin-left: 40px;
     cursor: pointer;
   }
 `
