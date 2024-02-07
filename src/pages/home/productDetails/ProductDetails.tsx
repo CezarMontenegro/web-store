@@ -1,4 +1,6 @@
-import { Link } from 'react-router-dom';
+import { Link, useParams} from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 import { useContext } from 'react';
 
@@ -7,14 +9,30 @@ import { APIContext } from '../../../context/APIContext';
 import { Container } from './ProductDetails.styles';
 
 function ProductDetails() {
+  const [productDetails, setProductDetails] = useState({})
+
+  const { id } = useParams();
 
   const { setWasFirstSearchMade, setProductsList } = useContext(APIContext);
 
   function handleLogo() {
     setWasFirstSearchMade(false);
     setProductsList([]);
-
   }
+
+  async function getProductDetails() {
+    try {
+      const response = await axios(`https://api.mercadolibre.com/items/${id}`)
+      setProductDetails(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  useEffect(() => {
+    getProductDetails()
+  }, []);
+
+  console.log(productDetails)
 
   return (
     <Container>

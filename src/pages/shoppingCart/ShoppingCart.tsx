@@ -12,8 +12,8 @@ function ShoppingCart() {
   function handleLogo() {
     setWasFirstSearchMade(false);
     setProductsList([]);
-
   }
+
   return (
     <Container>
       <header>

@@ -86,6 +86,10 @@ function APIContextProvider({children}: Props) {
     }
   }
 
+  // export async function getProductsDetails(productId) {
+  //   return (await fetch(`https://api.mercadolibre.com/items/${productId}`)).json();
+  // }
+
   const contextValue = {
     productsList,
     setProductsList,
