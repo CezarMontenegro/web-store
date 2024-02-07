@@ -8,8 +8,19 @@ import { APIContext } from '../../../context/APIContext';
 
 import { Container } from './ProductDetails.styles';
 
+interface ProductDetails {
+  id: number;
+  thumbnail: string;
+  title: string ;
+  original_price: number;
+  price: number;
+  shipping: {free_shipping: boolean};
+  attributes: {name: string, value_name: string}[]
+}
+
+
 function ProductDetails() {
-  const [productDetails, setProductDetails] = useState({})
+  const [productDetails, setProductDetails] = useState<ProductDetails>({} as ProductDetails)
 
   const { id } = useParams();
 
@@ -46,6 +57,29 @@ function ProductDetails() {
           <Link to="/"><i className="fa-solid fa-arrow-left"></i></Link>
         </div>
       </header>
+      {(Object.keys(productDetails).length == 0) && <p>Loading...</p>}
+      {(Object.keys(productDetails).length > 0) && <main>
+        <div className="price">
+          <h4>{`${productDetails.title} - R$${productDetails.price.toFixed(2)}`}</h4>
+        </div>
+        <div className="second-container">
+          <div className="thumbnail">
+            <img src={productDetails.thumbnail} alt={productDetails.title} />
+          </div>
+          <div className="details">
+            <h4>Features</h4>
+            {productDetails.attributes.map((product) => (
+              <p>{`${product.name}: ${product.value_name}`}</p>
+            ))}
+          </div>
+          <div className="add-product">
+
+          </div>
+        </div>
+        <div className="avaliations">
+
+        </div>
+      </main>}
     </Container>
   )
 }

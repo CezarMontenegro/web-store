@@ -41,4 +41,51 @@ export const Container = styled.div`
     color: #000;
   }
 
+  main {
+    width: 100vw;
+    height: calc(100vh - 50px);
+    padding: 20px 40px;
+    box-sizing: border-box;
+  }
+
+  .price {
+    border: 1px solid red;
+    height: 5%;
+    margin-bottom: 10px;
+  }
+
+  .second-container {
+    border: 1px solid red;
+    height: 60%;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .thumbnail {
+    border: 1px solid blue;
+    width: 33%;
+
+    img {
+      height: 100%;
+      width: 100%;
+    }
+  }
+
+
+  .details {
+    width: 33%;
+    border: 1px solid blue;
+  }
+
+  .add-product {
+    width: 33%;
+    border: 1px solid blue;
+  }
+
+  .avaliations {
+    border: 1px solid red;
+    height: 30%;
+  }
+
 `
