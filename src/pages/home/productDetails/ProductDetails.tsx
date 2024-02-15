@@ -62,18 +62,28 @@ function ProductDetails() {
         <div className="price">
           <h4>{`${productDetails.title} - R$${productDetails.price.toFixed(2)}`}</h4>
         </div>
-        <div className="second-container">
-          <div className="thumbnail">
-            <img src={productDetails.thumbnail} alt={productDetails.title} />
+        <div className="product">
+          <div className="card">
+            <div className="thumbnail">
+              <img src={productDetails.thumbnail} alt={productDetails.title} />
+            </div>
+            <div className="qty">
+              <i className="fa-regular fa-square-minus"></i>
+                <p>quanty</p>
+              <i className="fa-regular fa-square-plus"></i>
+            </div>
           </div>
           <div className="details">
-            <h4>Features</h4>
-            {productDetails.attributes.map((product) => (
-              <p>{`${product.name}: ${product.value_name}`}</p>
-            ))}
-          </div>
-          <div className="add-product">
-
+            <div className="details-title">
+              <h4>Features</h4>
+            </div>
+            <div className="details-features">
+              <ul>
+                {productDetails.attributes.map((product) => (
+                  <li>{`${product.name}: ${product.value_name}`}</li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
         <div className="avaliations">

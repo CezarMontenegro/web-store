@@ -46,40 +46,104 @@ export const Container = styled.div`
     height: calc(100vh - 50px);
     padding: 20px 40px;
     box-sizing: border-box;
+    background-color: #e7e7e7;
   }
 
   .price {
-    border: 1px solid red;
     height: 5%;
     margin-bottom: 10px;
+    display: flex;
+    justify-content: left;
+    align-items: center;
   }
 
-  .second-container {
-    border: 1px solid red;
+  .price h4 {
+    font-weight: bolder;
+    font-size: 24px;
+  }
+
+  .product {
     height: 60%;
     margin-bottom: 10px;
     display: flex;
     justify-content: space-between;
   }
 
-  .thumbnail {
-    border: 1px solid blue;
-    width: 33%;
-
-    img {
-      height: 100%;
-      width: 100%;
-    }
+  .card {
+    border: 1px solid #d0c7c7;
+    width: 280px;
+    background-color: #fff;
   }
 
+  .thumbnail {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid #e9e9e9;
+  }
+
+  .thumbnail img {
+    height: 200px;
+    width: 168px;
+  }
+
+  .card .qty {
+    width: 140px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border: 1px solid red;
+    margin: 0 auto;
+  }
 
   .details {
-    width: 33%;
-    border: 1px solid blue;
+    width: 79%;
+    background-color: #fff;
+    border: 1px solid #d0c7c7;
+  }
+
+  .details-title {
+    width: 100%;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .details-title h4 {
+    font-weight: bold;
+    font-size: 24px;
+  }
+
+  .details-features {
+    width: 100%;
+    height: calc(100% - 30px);
+    overflow: scroll;
+  }
+
+  .details-features ul {
+    height: 100%;
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    line-height: 25px;
+    box-sizing: border-box;
+  }
+
+  .details-features li {
+    list-style: none;
+    list-style-position: inside;
+  }
+
+  .details-features li::marker {
+    margin: 0;
   }
 
   .add-product {
-    width: 33%;
+    width: 39%;
     border: 1px solid blue;
   }
 
