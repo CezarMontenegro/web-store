@@ -2,7 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 
 import Home from './pages/home/Home';
 import ShoppingCart from './pages/shoppingCart/ShoppingCart';
-import ProductDetails from './pages/home/productDetails/productDetails';
+import ProductDetails from './pages/productDetails/productDetails';
 
 import { Container } from './App.styles';
 

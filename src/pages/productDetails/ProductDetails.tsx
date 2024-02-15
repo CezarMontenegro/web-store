@@ -4,7 +4,7 @@ import axios from 'axios';
 
 import { useContext } from 'react';
 
-import { APIContext } from '../../../context/APIContext';
+import { APIContext } from '../../context/APIContext';
 
 import { Container } from './ProductDetails.styles';
 
