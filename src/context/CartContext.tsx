@@ -5,19 +5,24 @@ interface Props {
   children: ReactNode;
 }
 
-interface CartContextData {
+interface CartProducts {
+  id: number;
   qty: number;
-  setQty: Dispatch<SetStateAction<number>>
+}
+
+interface CartContextData {
+  cartProducts: CartProducts[];
+  setCartProducts: Dispatch<SetStateAction<CartProducts[]>>
 }
 
 export const CartContext = createContext({} as CartContextData);
 
 function CartContextProvider({children}: Props) {
-  const [qty, setQty] = useState(0);
+  const [cartProducts, setCartProducts] = useState<CartProducts[]>([]);
 
   const contextValue = {
-    qty,
-    setQty
+    cartProducts,
+    setCartProducts,
   }
 
   return (

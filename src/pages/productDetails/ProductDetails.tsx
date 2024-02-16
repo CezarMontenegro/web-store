@@ -18,7 +18,6 @@ interface ProductDetails {
   attributes: {name: string, value_name: string}[]
 }
 
-
 function ProductDetails() {
   const [productDetails, setProductDetails] = useState<ProductDetails>({} as ProductDetails)
 
@@ -87,7 +86,6 @@ function ProductDetails() {
           </div>
         </div>
         <div className="avaliations">
-
         </div>
       </main>}
     </Container>

@@ -14,7 +14,7 @@ interface Category {
 interface ProductsList {
   id: number;
   thumbnail: string;
-  title: string ;
+  title: string;
   original_price: number;
   price: number;
   shipping: {free_shipping: boolean};
