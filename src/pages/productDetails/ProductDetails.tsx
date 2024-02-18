@@ -13,6 +13,7 @@ interface ProductDetails {
   id: number;
   thumbnail: string;
   title: string ;
+  initial_quantity: number;
   original_price: number;
   price: number;
   shipping: {free_shipping: boolean};
@@ -28,11 +29,6 @@ function ProductDetails() {
   const { setWasFirstSearchMade, setProductsList } = useContext(APIContext);
   const { setCartProductList } = useContext(CartContext);
 
-  function handleLogo() {
-    setWasFirstSearchMade(false);
-    setProductsList([]);
-  }
-
   async function getProductDetails() {
     try {
       const response = await axios(`https://api.mercadolibre.com/items/${id}`)
@@ -45,9 +41,28 @@ function ProductDetails() {
     getProductDetails()
   }, []);
 
-  console.log(productDetails)
-  console.log(id, typeof id)
+  function handleLogo() {
+    setWasFirstSearchMade(false);
+    setProductsList([]);
+  }
 
+  function handleMinusButton() {
+    if (qty > 0) {
+      setQty((prev) => prev - 1);
+    }
+    localStorage.setItem(`${id}`, JSON.stringify(qty));
+  }
+
+  function handlePlusButton() {
+    qty < productDetails.initial_quantity ? 
+      setQty((prev) => prev + 1) :
+      window.alert('maximum stock has been exceeded');
+
+    localStorage.setItem(`${id}`, JSON.stringify(qty));
+  }
+
+
+  console.log(productDetails)
   return (
     <Container>
       <header>
@@ -73,14 +88,14 @@ function ProductDetails() {
             <div className="qty">
               <button
                 className="qty-minus"
-                onClick={() => setQty((prev) => prev - 1)}
+                onClick={handleMinusButton}
               >
                 <i className="fa-regular fa-square-minus"></i>
               </button>
                 <p>{qty}</p>
               <button
                 className="qty-minus"
-                onClick={() => setQty((prev) => prev + 1)}
+                onClick={handlePlusButton}
               >
                 <i className="fa-regular fa-square-plus"></i>
               </button>
