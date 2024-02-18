@@ -37,9 +37,20 @@ function ProductDetails() {
       console.error(error);
     }
   }
+
+  function getLocalStorageQty() {
+    const data = localStorage.getItem(`${id}`);
+    if (data) {
+      setQty(JSON.parse(data));
+    }
+  }
+
   useEffect(() => {
-    getProductDetails()
+    getProductDetails();
+    getLocalStorageQty();
   }, []);
+
+
 
   function handleLogo() {
     setWasFirstSearchMade(false);
@@ -48,21 +59,27 @@ function ProductDetails() {
 
   function handleMinusButton() {
     if (qty > 0) {
-      setQty((prev) => prev - 1);
+      setQty((prev) => {
+        const updatedQty = prev - 1;
+        localStorage.setItem(`${id}`, JSON.stringify(updatedQty));
+        return updatedQty;
+      });
     }
-    localStorage.setItem(`${id}`, JSON.stringify(qty));
   }
 
   function handlePlusButton() {
-    qty < productDetails.initial_quantity ? 
-      setQty((prev) => prev + 1) :
+    if (qty < productDetails.initial_quantity) {
+      setQty((prev) => {
+        const updatedQty = prev + 1;
+        localStorage.setItem(`${id}`, JSON.stringify(updatedQty));
+        return updatedQty;
+      });
+    } else {
       window.alert('maximum stock has been exceeded');
-
-    localStorage.setItem(`${id}`, JSON.stringify(qty));
+    }
   }
 
-
-  console.log(productDetails)
+  // console.log(productDetails);
   return (
     <Container>
       <header>
