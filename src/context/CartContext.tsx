@@ -6,23 +6,23 @@ interface Props {
 }
 
 interface CartProducts {
-  id: number;
+  id: string | undefined;
   qty: number;
 }
 
 interface CartContextData {
-  cartProducts: CartProducts[];
-  setCartProducts: Dispatch<SetStateAction<CartProducts[]>>
+  cartProductList: CartProducts[];
+  setCartProductList: Dispatch<SetStateAction<CartProducts[]>>
 }
 
 export const CartContext = createContext({} as CartContextData);
 
 function CartContextProvider({children}: Props) {
-  const [cartProducts, setCartProducts] = useState<CartProducts[]>([]);
+  const [cartProductList, setCartProductList] = useState<CartProducts[]>([]);
 
   const contextValue = {
-    cartProducts,
-    setCartProducts,
+    cartProductList,
+    setCartProductList,
   }
 
   return (

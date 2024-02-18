@@ -5,6 +5,7 @@ import axios from 'axios';
 import { useContext } from 'react';
 
 import { APIContext } from '../../context/APIContext';
+import { CartContext } from '../../context/CartContext';
 
 import { Container } from './ProductDetails.styles';
 
@@ -15,15 +16,17 @@ interface ProductDetails {
   original_price: number;
   price: number;
   shipping: {free_shipping: boolean};
-  attributes: {name: string, value_name: string}[]
+  attributes: {id: string, name: string, value_name: string}[]
 }
 
 function ProductDetails() {
-  const [productDetails, setProductDetails] = useState<ProductDetails>({} as ProductDetails)
+  const [productDetails, setProductDetails] = useState<ProductDetails>({} as ProductDetails);
+  const [qty, setQty] = useState<number>(0)
 
   const { id } = useParams();
 
   const { setWasFirstSearchMade, setProductsList } = useContext(APIContext);
+  const { setCartProductList } = useContext(CartContext);
 
   function handleLogo() {
     setWasFirstSearchMade(false);
@@ -43,6 +46,7 @@ function ProductDetails() {
   }, []);
 
   console.log(productDetails)
+  console.log(id, typeof id)
 
   return (
     <Container>
@@ -67,9 +71,26 @@ function ProductDetails() {
               <img src={productDetails.thumbnail} alt={productDetails.title} />
             </div>
             <div className="qty">
-              <i className="fa-regular fa-square-minus"></i>
-                <p>quanty</p>
-              <i className="fa-regular fa-square-plus"></i>
+              <button
+                className="qty-minus"
+                onClick={() => setQty((prev) => prev - 1)}
+              >
+                <i className="fa-regular fa-square-minus"></i>
+              </button>
+                <p>{qty}</p>
+              <button
+                className="qty-minus"
+                onClick={() => setQty((prev) => prev + 1)}
+              >
+                <i className="fa-regular fa-square-plus"></i>
+              </button>
+            </div>
+            <div className="add-button">
+              <button
+                onClick={() => setCartProductList((prev) => [...prev, {id, qty}])}
+              >
+                Add
+              </button>
             </div>
           </div>
           <div className="details">
@@ -79,7 +100,7 @@ function ProductDetails() {
             <div className="details-features">
               <ul>
                 {productDetails.attributes.map((product) => (
-                  <li>{`${product.name}: ${product.value_name}`}</li>
+                  <li key={product.id}>{`${product.name}: ${product.value_name}`}</li>
                 ))}
               </ul>
             </div>
