@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { useContext } from 'react';
 
@@ -11,10 +11,17 @@ function ShoppingCart() {
   const { setWasFirstSearchMade, setProductsList } = useContext(APIContext);
   const { cartProductList } = useContext(CartContext);
 
+  const navigate = useNavigate();
+
   function handleLogo() {
     setWasFirstSearchMade(false);
     setProductsList([]);
   }
+
+  function handleBackArrow() {
+    navigate(-1);
+  }
+
 
   return (
     <Container>
@@ -24,7 +31,7 @@ function ShoppingCart() {
           <h4>Shopping Cart</h4>
         </div>
         <div className='nav'>
-          <Link to="/"><i className="fa-solid fa-arrow-left"></i></Link>
+          <div onClick={handleBackArrow}><i className="fa-solid fa-arrow-left"></i></div>
         </div>
       </header>
       <main>
