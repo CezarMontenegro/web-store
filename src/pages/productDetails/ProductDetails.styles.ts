@@ -88,13 +88,37 @@ export const Container = styled.div`
   }
 
   .card .qty {
-    width: 140px;
+    width: 180px;
     height: 60px;
     display: flex;
     align-items: center;
     justify-content: space-around;
     border: 1px solid red;
     margin: 0 auto;
+  }
+
+  .qty .qty-button {
+    background-color: #fff;
+    border: none;
+    font-size: 24px;
+    color: rgb(51, 72, 228);
+    cursor: pointer;
+  }
+
+  .qty .qty-button:active {
+    transform: scale(1.1);
+    font-weight: bolder;
+  }
+
+  .qty-amount {
+    font-size: 24px;
+    border: 2px solid  rgb(51, 72, 228);
+    color: rgb(29, 39, 112);
+    border-radius: 50%;
+    height: 45px;
+    width: 45px;
+    text-align: center;
+    line-height: 45px;
   }
 
   .details {

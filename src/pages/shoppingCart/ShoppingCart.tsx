@@ -36,7 +36,7 @@ function ShoppingCart() {
       </header>
       <main>
         {cartProductList.map((product) => (
-          <p>{`${product.id}, ${product.qty}`}</p>
+          <p key={product.id}>{`${product.id}, ${product.qty}`}</p>
         ))}
       </main>
   </Container>
