@@ -90,11 +90,13 @@ export const Container = styled.div`
   .card .qty {
     width: 180px;
     height: 60px;
-    display: flex;
+    /* display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-around; */
     border: 1px solid red;
     margin: 0 auto;
+    text-align: center;
+    line-height: 65px;
   }
 
   .qty .qty-button {
@@ -103,6 +105,8 @@ export const Container = styled.div`
     font-size: 24px;
     color: rgb(51, 72, 228);
     cursor: pointer;
+    display: inline-block;
+    padding: 0;
   }
 
   .qty .qty-button:active {
@@ -112,13 +116,15 @@ export const Container = styled.div`
 
   .qty-amount {
     font-size: 24px;
-    border: 2px solid  rgb(51, 72, 228);
+    border: 2px solid rgb(51, 72, 228);
     color: rgb(29, 39, 112);
     border-radius: 50%;
     height: 45px;
     width: 45px;
     text-align: center;
     line-height: 45px;
+    display: inline-block;
+    margin: 0 30px;
   }
 
   .details {
