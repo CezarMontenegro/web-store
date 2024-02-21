@@ -1,14 +1,17 @@
+//libraries
 import { Link, useParams} from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-
 import { useContext } from 'react';
 
+//contexts
 import { APIContext } from '../../context/APIContext';
 import { CartContext } from '../../context/CartContext';
 
+//styles
 import { Container } from './ProductDetails.styles';
 
+//interfaces
 interface ProductDetails {
   id: number;
   thumbnail: string;
@@ -21,15 +24,21 @@ interface ProductDetails {
 }
 
 function ProductDetails() {
+  //states
   const [productDetails, setProductDetails] = useState<ProductDetails>({} as ProductDetails);
   const [qty, setQty] = useState<number>(0);
   const [maximunStock, setMaximunStock] = useState<number>(0);
+  const [loading, setLoading] = useState<boolean>(true);
 
+  //url params
   const { id } = useParams();
 
+  //context(global) states
   const { setWasFirstSearchMade } = useContext(APIContext);
   const { cartProductList, setCartProductList } = useContext(CartContext);
 
+  //functions
+  //fetch the product details and set the state
   async function getProductDetails() {
     try {
       const response = await axios(`https://api.mercadolibre.com/items/${id}`)
@@ -39,6 +48,7 @@ function ProductDetails() {
     }
   }
 
+  //fetch qty from localStorage according to product ID that comes in the url
   function getLocalStorageQty() {
     const data = localStorage.getItem(`${id}`);
     if (data) {
@@ -46,13 +56,14 @@ function ProductDetails() {
     }
   }
 
+  //get the maximun units of the product the user can buy;
   function getInitialStock() {
     const isProductAlreadyInCart = cartProductList.some((product) => product.id === id);
-
     if (!isProductAlreadyInCart) setMaximunStock(productDetails.initial_quantity);
     if (isProductAlreadyInCart) {
-      const product = cartProductList.find(product => product.id == id);
-      console.log(product);
+      console.log('o produto já esta no carrinho');
+      const productIndex = cartProductList.findIndex(product => product.id == id);
+      setMaximunStock(productDetails.initial_quantity - cartProductList[productIndex].qty);
     }
   }
 
@@ -65,10 +76,12 @@ function ProductDetails() {
     getInitialStock();
   },[productDetails])
 
+  //it heads back to land page
   function handleLogo() {
     setWasFirstSearchMade(false);
   }
 
+  //decreases qty and save it on localStorage
   function handleMinusButton() {
     if (qty > 0) {
       setQty((prev) => {
@@ -79,6 +92,7 @@ function ProductDetails() {
     }
   }
 
+  //increases qty and save it on localStorage
   function handlePlusButton() {
     if (qty < maximunStock) {
       setQty((prev) => {
@@ -91,6 +105,7 @@ function ProductDetails() {
     }
   }
 
+  //Add product to the cartProductList
   function handleAddButton() {
     const isProductAlreadyInCart = cartProductList.some((product) => product.id === id);
 
@@ -102,7 +117,6 @@ function ProductDetails() {
           title: productDetails.title,
           price: productDetails.price,
           thumbnail: productDetails.thumbnail,
-          maximunStock,
         }]
       );
     } else if (isProductAlreadyInCart){
@@ -118,12 +132,12 @@ function ProductDetails() {
     setMaximunStock(prev => prev - qty);
   }
 
-  console.log('productDetaisl:', productDetails);
-  console.log('maximunStock', maximunStock);
-  console.log('qty', qty);
+  //debbuging console.logs
+  // console.log('productDetaisl:', productDetails);
+  // console.log('maximunStock', maximunStock);
+  // console.log('qty', qty);
+  // console.log(loading);
   // console.log('cartList',cartProductList[0]);
-  
-  
   return (
     <Container>
       <header>
