@@ -146,6 +146,14 @@ export const Container = styled.div`
     transform: translate(0, 2px)
   }
 
+  .add-button button:disabled {
+    background-color: rgb(118, 118, 118);
+  }
+
+  .add-button button:disabled:active {
+    transform: none;
+  }
+
   .details {
     width: 79%;
     background-color: #fff;

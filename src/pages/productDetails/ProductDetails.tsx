@@ -61,7 +61,6 @@ function ProductDetails() {
     const isProductAlreadyInCart = cartProductList.some((product) => product.id === id);
     if (!isProductAlreadyInCart) setMaximunStock(productDetails.initial_quantity);
     if (isProductAlreadyInCart) {
-      console.log('o produto já esta no carrinho');
       const productIndex = cartProductList.findIndex(product => product.id == id);
       setMaximunStock(productDetails.initial_quantity - cartProductList[productIndex].qty);
     }
@@ -132,12 +131,6 @@ function ProductDetails() {
     setMaximunStock(prev => prev - qty);
   }
 
-  //debbuging console.logs
-  // console.log('productDetaisl:', productDetails);
-  // console.log('maximunStock', maximunStock);
-  // console.log('qty', qty);
-  // console.log(loading);
-  // console.log('cartList',cartProductList[0]);
   return (
     <Container>
       <header>
@@ -180,6 +173,7 @@ function ProductDetails() {
             <div className="add-button">
               <button
                 onClick={handleAddButton}
+                disabled={qty < 1}
               >
                 Add Product
               </button>
