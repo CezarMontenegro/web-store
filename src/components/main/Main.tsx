@@ -8,7 +8,7 @@ import { Container } from './Main.styles';
 
 function Main() {
   const { productsList, wasFirstSearchMade } = useContext(APIContext);
-  console.log(productsList);
+  
   return (
     <Container>
       {(!productsList.length && !wasFirstSearchMade) && (

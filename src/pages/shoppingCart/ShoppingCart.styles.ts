@@ -40,4 +40,60 @@ export const Container = styled.header`
   header div a:visited {
     color: #000;
   }
+
+  .cart-list {
+    width: 50%;
+    border: 1px solid red;
+    margin-top: 20px;
+    margin-left: 20px;
+    box-sizing: border-box;
+  }
+
+  .product-container {
+    border: 1px solid red;
+    display: flex;
+    margin-bottom: 10px;
+  }
+
+  .trash-container {
+    border: 1px solid red;
+    width: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .trash-container button {
+    height: 40px;
+    width: 40px;
+  }
+
+  .thumb-container {
+    border: 1px solid red;
+    width: 100px;
+  }
+
+  .thumb img {
+    width: 100%;
+    height: 100%;
+  }
+
+  .title-container {
+    border: 1px solid red;
+    width: 20%;
+
+  }
+
+  .qty-container {
+    border: 1px solid red;
+    width: 20%;
+
+  }
+
+  .price-container {
+    border: 1px solid red;
+    width: 20%;
+
+  }
+
 `

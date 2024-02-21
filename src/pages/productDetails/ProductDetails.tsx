@@ -17,22 +17,25 @@ interface ProductDetails {
   original_price: number;
   price: number;
   shipping: {free_shipping: boolean};
-  attributes: {id: string, name: string, value_name: string}[]
+  attributes: {id: string, name: string, value_name: string}[];
+
 }
 
 function ProductDetails() {
   const [productDetails, setProductDetails] = useState<ProductDetails>({} as ProductDetails);
-  const [qty, setQty] = useState<number>(0)
+  const [qty, setQty] = useState<number>(0);
+  const [maximunStock, setMaximunStock] = useState<number>(0);
 
   const { id } = useParams();
 
-  const { setWasFirstSearchMade, setProductsList } = useContext(APIContext);
-  const { setCartProductList } = useContext(CartContext);
+  const { setWasFirstSearchMade } = useContext(APIContext);
+  const { cartProductList, setCartProductList } = useContext(CartContext);
 
   async function getProductDetails() {
     try {
       const response = await axios(`https://api.mercadolibre.com/items/${id}`)
       setProductDetails(response.data);
+      setMaximunStock(response.data.initial_quantity);
     } catch (error) {
       console.error(error);
     }
@@ -50,11 +53,8 @@ function ProductDetails() {
     getLocalStorageQty();
   }, []);
 
-
-
   function handleLogo() {
     setWasFirstSearchMade(false);
-    setProductsList([]);
   }
 
   function handleMinusButton() {
@@ -68,7 +68,7 @@ function ProductDetails() {
   }
 
   function handlePlusButton() {
-    if (qty < productDetails.initial_quantity) {
+    if (qty < maximunStock) {
       setQty((prev) => {
         const updatedQty = prev + 1;
         localStorage.setItem(`${id}`, JSON.stringify(updatedQty));
@@ -79,7 +79,34 @@ function ProductDetails() {
     }
   }
 
-  // console.log(productDetails);
+  function handleAddButton() {
+    const isProductAlreadyInCart = cartProductList.some((product) => product.id === id);
+
+    if (!isProductAlreadyInCart) {
+      setCartProductList(
+        (prev) => [...prev, {
+          id,
+          qty,
+          title: productDetails.title,
+          price: productDetails.price,
+          thumbnail: productDetails.thumbnail,
+          maximunStock,
+        }]
+      );
+    } else if (isProductAlreadyInCart){
+      const productIndex = cartProductList.findIndex((product) => product.id == id);
+      cartProductList[productIndex].qty += qty;
+    }
+    setQty(() => {
+      const updatedQty = 0;
+      localStorage.setItem(`${id}`, JSON.stringify(updatedQty));
+      return updatedQty;
+    });
+    setMaximunStock(prev => prev - qty);
+  }
+
+  // console.log('productDetaisl:', productDetails);
+  console.log(maximunStock)
   return (
     <Container>
       <header>
@@ -109,7 +136,9 @@ function ProductDetails() {
               >
                 <i className="fa-solid fa-minus"></i>
               </button>
-              <div className="qty-amount">{qty}</div>
+              <div className="qty-amount">
+                {qty}
+              </div>
               <button
                 className="qty-button plus"
                 onClick={handlePlusButton}
@@ -119,9 +148,9 @@ function ProductDetails() {
             </div>
             <div className="add-button">
               <button
-                onClick={() => setCartProductList((prev) => [...prev, {id, qty}])}
+                onClick={handleAddButton}
               >
-                Add
+                Add Product
               </button>
             </div>
           </div>

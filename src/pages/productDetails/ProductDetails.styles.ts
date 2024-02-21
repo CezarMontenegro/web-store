@@ -90,13 +90,10 @@ export const Container = styled.div`
   .card .qty {
     width: 180px;
     height: 60px;
-    /* display: flex;
-    align-items: center;
-    justify-content: space-around; */
-    border: 1px solid red;
-    margin: 0 auto;
+    margin: 0 auto 10px auto;
     text-align: center;
     line-height: 65px;
+
   }
 
   .qty .qty-button {
@@ -125,6 +122,28 @@ export const Container = styled.div`
     line-height: 45px;
     display: inline-block;
     margin: 0 30px;
+  }
+
+  .card .add-button {
+    width: 180px;
+    height: 90px;
+    margin: 0 auto;
+    line-height: 90px;
+  }
+
+  .add-button button {
+    background-color: rgb(51, 72, 228);
+    color: #fff;
+    border: none;
+    height: 45px;
+    width: 180px;
+    cursor: pointer;
+    font-size: 24px;
+    transition: .3s;
+  }
+
+  .add-button button:active {
+    transform: translate(0, 2px)
   }
 
   .details {

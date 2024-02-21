@@ -8,6 +8,9 @@ interface Props {
 interface CartProducts {
   id: string | undefined;
   qty: number;
+  title: string;
+  price: number;
+  thumbnail: string;
 }
 
 interface CartContextData {
