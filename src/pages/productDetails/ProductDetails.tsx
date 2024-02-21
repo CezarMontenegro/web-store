@@ -28,7 +28,6 @@ function ProductDetails() {
   const [productDetails, setProductDetails] = useState<ProductDetails>({} as ProductDetails);
   const [qty, setQty] = useState<number>(0);
   const [maximunStock, setMaximunStock] = useState<number>(0);
-  const [loading, setLoading] = useState<boolean>(true);
 
   //url params
   const { id } = useParams();
@@ -129,6 +128,8 @@ function ProductDetails() {
     });
 
     setMaximunStock(prev => prev - qty);
+
+    localStorage.setItem('cartProductList', JSON.stringify(cartProductList));
   }
 
   return (
