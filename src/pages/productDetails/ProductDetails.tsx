@@ -18,7 +18,6 @@ interface ProductDetails {
   price: number;
   shipping: {free_shipping: boolean};
   attributes: {id: string, name: string, value_name: string}[];
-
 }
 
 function ProductDetails() {
@@ -35,7 +34,6 @@ function ProductDetails() {
     try {
       const response = await axios(`https://api.mercadolibre.com/items/${id}`)
       setProductDetails(response.data);
-      setMaximunStock(response.data.initial_quantity);
     } catch (error) {
       console.error(error);
     }
@@ -48,10 +46,24 @@ function ProductDetails() {
     }
   }
 
+  function getInitialStock() {
+    const isProductAlreadyInCart = cartProductList.some((product) => product.id === id);
+
+    if (!isProductAlreadyInCart) setMaximunStock(productDetails.initial_quantity);
+    if (isProductAlreadyInCart) {
+      const product = cartProductList.find(product => product.id == id);
+      console.log(product);
+    }
+  }
+
   useEffect(() => {
     getProductDetails();
     getLocalStorageQty();
   }, []);
+
+  useEffect(() => {
+    getInitialStock();
+  },[productDetails])
 
   function handleLogo() {
     setWasFirstSearchMade(false);
@@ -102,11 +114,16 @@ function ProductDetails() {
       localStorage.setItem(`${id}`, JSON.stringify(updatedQty));
       return updatedQty;
     });
+
     setMaximunStock(prev => prev - qty);
   }
 
-  // console.log('productDetaisl:', productDetails);
-  console.log(maximunStock)
+  console.log('productDetaisl:', productDetails);
+  console.log('maximunStock', maximunStock);
+  console.log('qty', qty);
+  // console.log('cartList',cartProductList[0]);
+  
+  
   return (
     <Container>
       <header>

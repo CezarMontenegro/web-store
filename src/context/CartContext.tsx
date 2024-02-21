@@ -11,6 +11,7 @@ interface CartProducts {
   title: string;
   price: number;
   thumbnail: string;
+  maximunStock: number;
 }
 
 interface CartContextData {
