@@ -1,17 +1,17 @@
-//libraries
+//Libraries
 import { Link, useParams} from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useContext } from 'react';
 
-//contexts
+//Contexts
 import { APIContext } from '../../context/APIContext';
 import { CartContext } from '../../context/CartContext';
 
-//styles
+//Styles
 import { Container } from './ProductDetails.styles';
 
-//interfaces
+//Interfaces
 interface ProductDetails {
   id: number;
   thumbnail: string;
@@ -24,7 +24,7 @@ interface ProductDetails {
 }
 
 function ProductDetails() {
-  //states
+  //States
   const [productDetails, setProductDetails] = useState<ProductDetails>({} as ProductDetails);
   const [qty, setQty] = useState<number>(0);
   const [maximunStock, setMaximunStock] = useState<number>(0);
@@ -32,12 +32,12 @@ function ProductDetails() {
   //url params
   const { id } = useParams();
 
-  //context(global) states
+  //Global states
   const { setWasFirstSearchMade } = useContext(APIContext);
   const { cartProductList, setCartProductList } = useContext(CartContext);
 
-  //functions
-  //fetch the product details and set the state
+  //Functions
+  //Fetch the product details and set the state
   async function getProductDetails() {
     try {
       const response = await axios(`https://api.mercadolibre.com/items/${id}`)
@@ -47,7 +47,7 @@ function ProductDetails() {
     }
   }
 
-  //fetch qty from localStorage according to product ID that comes in the url
+  //Fetch qty from localStorage according to product ID that comes in the url
   function getLocalStorageQty() {
     const data = localStorage.getItem(`${id}`);
     if (data) {
@@ -55,7 +55,7 @@ function ProductDetails() {
     }
   }
 
-  //get the maximun units of the product the user can buy;
+  //Get the maximun units of the product the user can buy;
   function getInitialStock() {
     const isProductAlreadyInCart = cartProductList.some((product) => product.id === id);
     if (!isProductAlreadyInCart) setMaximunStock(productDetails.initial_quantity);
@@ -74,12 +74,12 @@ function ProductDetails() {
     getInitialStock();
   },[productDetails])
 
-  //it heads back to land page
+  //It heads back to land page
   function handleLogo() {
     setWasFirstSearchMade(false);
   }
 
-  //decreases qty and save it on localStorage
+  //Decreases qty and save it on localStorage
   function handleMinusButton() {
     if (qty > 0) {
       setQty((prev) => {
@@ -90,7 +90,7 @@ function ProductDetails() {
     }
   }
 
-  //increases qty and save it on localStorage
+  //Increases qty and save it on localStorage
   function handlePlusButton() {
     if (qty < maximunStock) {
       setQty((prev) => {

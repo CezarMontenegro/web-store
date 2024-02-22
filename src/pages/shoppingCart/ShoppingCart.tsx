@@ -1,18 +1,24 @@
+//Libraries
 import { Link, useNavigate } from 'react-router-dom';
-
 import { useContext } from 'react';
 
+//Contexts
 import { APIContext } from '../../context/APIContext';
 import { CartContext } from '../../context/CartContext';
 
+//Styles
 import { Container } from './ShoppingCart.styles';
 
+
 function ShoppingCart() {
+  //Global states
   const { setWasFirstSearchMade, setProductsList } = useContext(APIContext);
   const { cartProductList } = useContext(CartContext);
 
+  //Consts and variables
   const navigate = useNavigate();
 
+  //Functions
   function handleLogo() {
     setWasFirstSearchMade(false);
     setProductsList([]);
@@ -20,6 +26,30 @@ function ShoppingCart() {
 
   function handleBackArrow() {
     navigate(-1);
+  }
+
+  //Decreases qty and save it on localStorage
+  function handleMinusButton() {
+    if (qty > 0) {
+      setQty((prev) => {
+        const updatedQty = prev - 1;
+        localStorage.setItem(`${id}`, JSON.stringify(updatedQty));
+        return updatedQty;
+      });
+    }
+  }
+
+  //Increases qty and save it on localStorage
+  function handlePlusButton() {
+    if (qty < maximunStock) {
+      setQty((prev) => {
+        const updatedQty = prev + 1;
+        localStorage.setItem(`${id}`, JSON.stringify(updatedQty));
+        return updatedQty;
+      });
+    } else {
+      window.alert('maximum stock has been exceeded');
+    }
   }
 
 
@@ -51,21 +81,21 @@ function ShoppingCart() {
                 {product.title}
               </div>
               <div className="qty-container">
-              <button
-                className="qty-button minus"
-                // onClick={handleMinusButton}
-              >
-                <i className="fa-solid fa-minus"></i>
-              </button>
-              <div className="qty-amount">
-                {product.qty}
-              </div>
-              <button
-                className="qty-button plus"
-                // onClick={handlePlusButton}
-              >
-                <i className="fa-solid fa-plus"></i>
-              </button>
+                <button
+                  className="qty-button minus"
+                  onClick={handleMinusButton}
+                >
+                  <i className="fa-solid fa-minus"></i>
+                </button>
+                <div className="qty-amount">
+                  {product.qty}
+                </div>
+                <button
+                  className="qty-button plus"
+                  onClick={handlePlusButton}
+                >
+                  <i className="fa-solid fa-plus"></i>
+                </button>
               </div>
               <div className="price-container">
                 {product.price}
