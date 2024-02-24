@@ -108,30 +108,35 @@ function ProductDetails() {
     const isProductAlreadyInCart = cartProductList.some((product) => product.id === id);
 
     if (!isProductAlreadyInCart) {
-      setCartProductList(
-        (prev) => [...prev, {
-          id,
-          qty,
-          title: productDetails.title,
-          price: productDetails.price,
-          thumbnail: productDetails.thumbnail,
-        }]
-      );
-    } else if (isProductAlreadyInCart){
+      setCartProductList((prev) => {
+        const updatedCartProductList = [
+          ...prev,
+          {
+            id,
+            qty,
+            title: productDetails.title,
+            price: productDetails.price,
+            thumbnail: productDetails.thumbnail,
+          }
+        ];
+        localStorage.setItem('cartProductList', JSON.stringify(updatedCartProductList));
+        return updatedCartProductList;
+      }
+    );
+    } else {
       const productIndex = cartProductList.findIndex((product) => product.id == id);
       cartProductList[productIndex].qty += qty;
+      localStorage.setItem('cartProductList', JSON.stringify(cartProductList));
     }
+    setMaximunStock(prev => prev - qty);
     setQty(() => {
       const updatedQty = 0;
       localStorage.setItem(`${id}`, JSON.stringify(updatedQty));
       return updatedQty;
     });
-
-    setMaximunStock(prev => prev - qty);
-
-    localStorage.setItem('cartProductList', JSON.stringify(cartProductList));
   }
 
+  console.log(cartProductList)
   return (
     <Container>
       <header>

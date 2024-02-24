@@ -1,6 +1,6 @@
 //Libraries
 import { Link, useNavigate } from 'react-router-dom';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 
 //Contexts
 import { APIContext } from '../../context/APIContext';
@@ -12,7 +12,7 @@ import { Container } from './ShoppingCart.styles';
 
 function ShoppingCart() {
   //Global states
-  const { setWasFirstSearchMade, setProductsList } = useContext(APIContext);
+  const { setWasFirstSearchMade } = useContext(APIContext);
   const { cartProductList } = useContext(CartContext);
 
   //Consts and variables
@@ -21,39 +21,45 @@ function ShoppingCart() {
   //Functions
   function handleLogo() {
     setWasFirstSearchMade(false);
-    setProductsList([]);
   }
 
   function handleBackArrow() {
     navigate(-1);
   }
 
+  useEffect(() => {
+
+  }, [cartProductList])
+
   //Decreases qty and save it on localStorage
-  function handleMinusButton() {
-    if (qty > 0) {
-      setQty((prev) => {
-        const updatedQty = prev - 1;
-        localStorage.setItem(`${id}`, JSON.stringify(updatedQty));
-        return updatedQty;
-      });
-    }
+  function handleMinusButton(index: number) {
+    // if (qty > 0) {
+    //   setQty((prev) => {
+    //     const updatedQty = prev - 1;
+    //     localStorage.setItem(`${id}`, JSON.stringify(updatedQty));
+    //     return updatedQty;
+    //   });
+    // }
+    cartProductList[index].qty -= 1;
+    localStorage.setItem('cartProductList', JSON.stringify(cartProductList));
   }
 
   //Increases qty and save it on localStorage
-  function handlePlusButton() {
-    if (qty < maximunStock) {
-      setQty((prev) => {
-        const updatedQty = prev + 1;
-        localStorage.setItem(`${id}`, JSON.stringify(updatedQty));
-        return updatedQty;
-      });
-    } else {
-      window.alert('maximum stock has been exceeded');
-    }
+  function handlePlusButton(index: number) {
+    // if (qty < maximunStock) {
+    //   setQty((prev) => {
+    //     const updatedQty = prev + 1;
+    //     localStorage.setItem(`${id}`, JSON.stringify(updatedQty));
+    //     return updatedQty;
+    //   });
+    // } else {
+    //   window.alert('maximum stock has been exceeded');
+    // }
+    cartProductList[index].qty += 1;
+    localStorage.setItem('cartProductList', JSON.stringify(cartProductList));
   }
 
-
-  // console.log(cartProductList);
+  console.log(cartProductList);
   return (
     <Container>
       <header>
@@ -67,7 +73,7 @@ function ShoppingCart() {
       </header>
       <main>
         <div className="cart-list">
-          {cartProductList.map((product) => (
+          {cartProductList.map((product, index) => (
             <div className="product-container" key={product.id}>
               <div className="trash-container">
                 <button>
@@ -83,16 +89,16 @@ function ShoppingCart() {
               <div className="qty-container">
                 <button
                   className="qty-button minus"
-                  onClick={handleMinusButton}
+                  onClick={() => handleMinusButton(index)}
                 >
                   <i className="fa-solid fa-minus"></i>
                 </button>
                 <div className="qty-amount">
-                  {product.qty}
+                  {cartProductList[index].qty}
                 </div>
                 <button
                   className="qty-button plus"
-                  onClick={handlePlusButton}
+                  onClick={() => handlePlusButton(index)}
                 >
                   <i className="fa-solid fa-plus"></i>
                 </button>
