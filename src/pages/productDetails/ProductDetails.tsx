@@ -65,11 +65,13 @@ function ProductDetails() {
     }
   }
 
+  // Fetch initial data to render the page;
   useEffect(() => {
     getProductDetails();
     getLocalStorageQty();
   }, []);
 
+  //Updtate maximumStock after productDetails is updated;
   useEffect(() => {
     getInitialStock();
   },[productDetails])
@@ -108,9 +110,8 @@ function ProductDetails() {
     const isProductAlreadyInCart = cartProductList.some((product) => product.id === id);
 
     if (!isProductAlreadyInCart) {
-      setCartProductList((prev) => {
-        const updatedCartProductList = [
-          ...prev,
+      const updatedCartProductList = [
+        ...cartProductList,
           {
             id,
             qty,
@@ -118,15 +119,13 @@ function ProductDetails() {
             price: productDetails.price,
             thumbnail: productDetails.thumbnail,
           }
-        ];
-        localStorage.setItem('cartProductList', JSON.stringify(updatedCartProductList));
-        return updatedCartProductList;
-      }
-    );
+      ];
+      setCartProductList(updatedCartProductList);
     } else {
-      const productIndex = cartProductList.findIndex((product) => product.id == id);
-      cartProductList[productIndex].qty += qty;
-      localStorage.setItem('cartProductList', JSON.stringify(cartProductList));
+      const updatedCartProductList = [...cartProductList];
+      const productIndex = updatedCartProductList.findIndex((product) => product.id == id);
+      updatedCartProductList[productIndex].qty += qty;
+      setCartProductList(updatedCartProductList);
     }
     setMaximunStock(prev => prev - qty);
     setQty(() => {
@@ -135,6 +134,9 @@ function ProductDetails() {
       return updatedQty;
     });
   }
+  useEffect(() => {
+    localStorage.setItem('cartProductList', JSON.stringify(cartProductList));
+  }, [cartProductList])
 
   console.log(cartProductList)
   return (
