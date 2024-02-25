@@ -59,8 +59,14 @@ function ShoppingCart() {
 
     const updatedCartProductList = [...cartProductList];
     const productIndex = updatedCartProductList.findIndex((product) => product.id == id);
-    updatedCartProductList[productIndex].qty += 1;
-    setCartProductList(updatedCartProductList);
+
+    if (updatedCartProductList[productIndex].qty < updatedCartProductList[productIndex].maximunStock) {
+      updatedCartProductList[productIndex].qty += 1;
+      setCartProductList(updatedCartProductList);
+    } else {
+      window.alert('maximum stock has been exceeded');
+    }
+
   }
 
   console.log(cartProductList);

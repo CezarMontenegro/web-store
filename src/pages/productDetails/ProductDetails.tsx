@@ -118,6 +118,7 @@ function ProductDetails() {
             title: productDetails.title,
             price: productDetails.price,
             thumbnail: productDetails.thumbnail,
+            maximunStock,
           }
       ];
       setCartProductList(updatedCartProductList);
