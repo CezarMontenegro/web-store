@@ -9,11 +9,11 @@ export const Container = styled.div`
   cursor: pointer;
   transition: .3s;
   border: 1px solid #d0c7c7;
+  
 
   &:hover {
   box-shadow: 0 20px 20px 0 rgba(185,185,185);
 }
-
 
   .img {
     width: 100%;

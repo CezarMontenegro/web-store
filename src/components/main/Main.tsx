@@ -2,22 +2,29 @@ import { useContext } from "react";
 
 import Card from "../card/Card";
 
-import { APIContext } from "../../context/Context";
+import { APIContext } from "../../context/APIContext";
 
 import { Container } from './Main.styles';
 
 function Main() {
-  const { productsByCategory } = useContext(APIContext)
+  const { productsList, wasFirstSearchMade } = useContext(APIContext);
+  
   return (
     <Container>
-      {!productsByCategory.length && (
+      {(!productsList.length && !wasFirstSearchMade) && (
         <div>
           Digite o nome de um produto ou escolha uma categoria.
         </div>
       )}
-      {(productsByCategory.length > 0) && productsByCategory.map((product) => {
+      {(!productsList.length && wasFirstSearchMade) && (
+        <div>
+          Nenhum produto foi encontrado.
+        </div>
+      )}
+      {(productsList.length > 0) && productsList.map((product) => {
         return (
           <Card
+            id={product.id}
             img={product.thumbnail}
             title={product.title}
             originalPrice={product.original_price}

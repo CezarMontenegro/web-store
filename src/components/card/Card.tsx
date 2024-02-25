@@ -1,7 +1,10 @@
+import { Link } from 'react-router-dom';
+
 import { Container } from './Card.styles';
 
 
 interface Props {
+  id: number
   img: string;
   title: string ;
   originalPrice: number;
@@ -9,7 +12,7 @@ interface Props {
   shipping: boolean;
 }
 
-function Card({img, title, originalPrice, price, shipping }: Props) {
+function Card({ id, img, title, originalPrice, price, shipping }: Props) {
   function calculateDiscount() {
     if(originalPrice) {
       return (((originalPrice / price) - 1) * 100).toFixed(2);
@@ -17,8 +20,8 @@ function Card({img, title, originalPrice, price, shipping }: Props) {
   }
 
   return (
-    <Container>
-      <div>
+    <Link to={`productDetails/${id}`} style={{ textDecoration: 'none' }}>
+      <Container>
         <div className="img">
           <img src={img} alt={title}/>
         </div>
@@ -31,8 +34,8 @@ function Card({img, title, originalPrice, price, shipping }: Props) {
           <span>{originalPrice && `${calculateDiscount()}% OFF`}</span>
         </div>
         <div className="shipping">{shipping && "Frete grátis" }</div>
-      </div>
-    </Container>
+      </Container>
+    </Link>
   )
 }
 
