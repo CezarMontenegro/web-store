@@ -1,6 +1,6 @@
 //Libraries
 import { Link, useNavigate } from 'react-router-dom';
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 
 //Contexts
 import { APIContext } from '../../context/APIContext';
@@ -92,7 +92,7 @@ function ShoppingCart() {
                 </button>
               </div>
               <div className="thumb-container">
-                <img src={product.thumbnail} alt={product.title} />
+                <Link to={`/productDetails/${product.id}`}><img src={product.thumbnail} alt={product.title} /></Link>
               </div>
               <div className="title-container">
                 {product.title}
