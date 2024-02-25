@@ -138,7 +138,7 @@ function ProductDetails() {
     localStorage.setItem('cartProductList', JSON.stringify(cartProductList));
   }, [cartProductList])
 
-  console.log(cartProductList)
+  // console.log(cartProductList)
   return (
     <Container>
       <header>

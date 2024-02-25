@@ -13,7 +13,7 @@ import { Container } from './ShoppingCart.styles';
 function ShoppingCart() {
   //Global states
   const { setWasFirstSearchMade } = useContext(APIContext);
-  const { cartProductList } = useContext(CartContext);
+  const { cartProductList, setCartProductList } = useContext(CartContext);
 
   //Consts and variables
   const navigate = useNavigate();
@@ -27,9 +27,16 @@ function ShoppingCart() {
     navigate(-1);
   }
 
-  useEffect(() => {
+  function handleTrashButton(e: React.MouseEvent<HTMLElement>) {
+    const target = e.target as HTMLElement;
 
-  }, [cartProductList])
+    const updatedCartProductList = cartProductList.filter((product) => product.id != target.id);
+
+    setCartProductList(() => {
+      localStorage.setItem('cartProductList', JSON.stringify(updatedCartProductList));
+      return updatedCartProductList;
+    });
+  }
 
   //Decreases qty and save it on localStorage
   function handleMinusButton(index: number) {
@@ -76,8 +83,12 @@ function ShoppingCart() {
           {cartProductList.map((product, index) => (
             <div className="product-container" key={product.id}>
               <div className="trash-container">
-                <button>
-                  <i className="fa-solid fa-trash"></i>
+                <button
+                >
+                  <i 
+                  id={product.id}
+                  onClick={(e) => handleTrashButton(e)}
+                  className="fa-solid fa-trash"></i>
                 </button>
               </div>
               <div className="thumb-container">
