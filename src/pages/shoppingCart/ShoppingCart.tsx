@@ -39,31 +39,28 @@ function ShoppingCart() {
   }
 
   //Decreases qty and save it on localStorage
-  function handleMinusButton(index: number) {
-    // if (qty > 0) {
-    //   setQty((prev) => {
-    //     const updatedQty = prev - 1;
-    //     localStorage.setItem(`${id}`, JSON.stringify(updatedQty));
-    //     return updatedQty;
-    //   });
-    // }
-    cartProductList[index].qty -= 1;
-    localStorage.setItem('cartProductList', JSON.stringify(cartProductList));
+  function handleMinusButton(e: React.MouseEvent<HTMLElement>) {
+    const target = e.target as HTMLElement
+    const id = target.id;
+
+    const updatedCartProductList = [...cartProductList];
+    const productIndex = updatedCartProductList.findIndex((product) => product.id == id);
+
+    if (updatedCartProductList[productIndex].qty > 0) {
+      updatedCartProductList[productIndex].qty -= 1;
+      setCartProductList(updatedCartProductList);
+    }
   }
 
   //Increases qty and save it on localStorage
-  function handlePlusButton(index: number) {
-    // if (qty < maximunStock) {
-    //   setQty((prev) => {
-    //     const updatedQty = prev + 1;
-    //     localStorage.setItem(`${id}`, JSON.stringify(updatedQty));
-    //     return updatedQty;
-    //   });
-    // } else {
-    //   window.alert('maximum stock has been exceeded');
-    // }
-    cartProductList[index].qty += 1;
-    localStorage.setItem('cartProductList', JSON.stringify(cartProductList));
+  function handlePlusButton(e: React.MouseEvent<HTMLElement>) {
+    const target = e.target as HTMLElement
+    const id = target.id;
+
+    const updatedCartProductList = [...cartProductList];
+    const productIndex = updatedCartProductList.findIndex((product) => product.id == id);
+    updatedCartProductList[productIndex].qty += 1;
+    setCartProductList(updatedCartProductList);
   }
 
   console.log(cartProductList);
@@ -86,9 +83,10 @@ function ShoppingCart() {
                 <button
                 >
                   <i 
-                  id={product.id}
-                  onClick={(e) => handleTrashButton(e)}
-                  className="fa-solid fa-trash"></i>
+                    id={product.id}
+                    onClick={(e) => handleTrashButton(e)}
+                    className="fa-solid fa-trash">
+                  </i>
                 </button>
               </div>
               <div className="thumb-container">
@@ -100,18 +98,24 @@ function ShoppingCart() {
               <div className="qty-container">
                 <button
                   className="qty-button minus"
-                  onClick={() => handleMinusButton(index)}
                 >
-                  <i className="fa-solid fa-minus"></i>
+                  <i
+                    id={product.id}
+                    onClick={(e) => handleMinusButton(e)}
+                    className="fa-solid fa-minus">
+                  </i>
                 </button>
                 <div className="qty-amount">
                   {cartProductList[index].qty}
                 </div>
                 <button
                   className="qty-button plus"
-                  onClick={() => handlePlusButton(index)}
                 >
-                  <i className="fa-solid fa-plus"></i>
+                  <i
+                    id={product.id}
+                    onClick={(e) => handlePlusButton(e)}
+                    className="fa-solid fa-plus">
+                  </i>
                 </button>
               </div>
               <div className="price-container">

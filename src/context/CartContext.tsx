@@ -26,7 +26,9 @@ function CartContextProvider({children}: Props) {
   useEffect(() => {
     const data = localStorage.getItem('cartProductList');
     if (data) setCartProductList(JSON.parse(data));
-  }, [])
+  }, []);
+
+  
 
   const contextValue = {
     cartProductList,
