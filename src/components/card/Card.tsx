@@ -22,11 +22,11 @@ function Card({ id, img, title, originalPrice, price, shipping }: Props) {
   return (
     <Link to={`productDetails/${id}`} style={{ textDecoration: 'none' }}>
       <Container>
-        <div className="img">
+        <div className="img-container">
           <img src={img} alt={title}/>
         </div>
-        <div className="title">{title}</div>
-        <div className="original-price">
+        <div className="title-container">{title}</div>
+        <div className="original-price-container">
           <span>{originalPrice && `R$ ${originalPrice.toFixed(2)}`}</span>
         </div>
         <div className="price-container">
@@ -34,6 +34,11 @@ function Card({ id, img, title, originalPrice, price, shipping }: Props) {
           <span>{originalPrice && `${calculateDiscount()}% OFF`}</span>
         </div>
         <div className="shipping">{shipping && "Frete grátis" }</div>
+        <div className="add-button">
+          <button>
+            Add Product
+          </button>
+        </div>
       </Container>
     </Link>
   )

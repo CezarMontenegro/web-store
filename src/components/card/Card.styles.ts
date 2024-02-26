@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  height: 350px;
+  height: 380px;
   width: 200px;
   background-color: #fff;
   margin: 10px;
@@ -9,13 +9,12 @@ export const Container = styled.div`
   cursor: pointer;
   transition: .3s;
   border: 1px solid #d0c7c7;
-  
 
   &:hover {
   box-shadow: 0 20px 20px 0 rgba(185,185,185);
 }
 
-  .img {
+  .img-container {
     width: 100%;
     height: 200px;
     border-bottom: 1px solid #e9e9e9;
@@ -25,12 +24,12 @@ export const Container = styled.div`
     align-items: center;
   }
 
-  .img img {
+  .img-container img {
     width: 80%;
     height: 80%;
   }
 
-  .title {
+  .title-container {
     height: 30px;
     overflow: hidden;
     padding: 0 10px;
@@ -40,7 +39,7 @@ export const Container = styled.div`
     margin-bottom: 10px;
   }
 
-  .original-price {
+  .original-price-container {
     padding: 0 10px;
     color: #5e5e5e;
     font-size: 12px;
@@ -72,6 +71,27 @@ export const Container = styled.div`
     color: #54aa4b;
   }
 
+  .add-button {
+    border: 1px solid red;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
+  .add-button button {
+    background-color: rgb(51, 72, 228);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    height: 45px;
+    width: 180px;
+    cursor: pointer;
+    font-size: 24px;
+    transition: .3s;
+  }
 
+  .add-button button:active {
+    transform: translate(0, 2px)
+  }
 `

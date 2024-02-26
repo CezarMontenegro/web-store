@@ -131,10 +131,18 @@ function ShoppingCart() {
                 </button>
               </div>
               <div className="price-container">
-                {(product.price * product.qty).toFixed(2)}
+                {`R$ ${(product.price * product.qty).toFixed(2)}`}
               </div>
             </div>
           ))}
+        </div>
+        <div className="total-price-container">
+          <div>{'Valor total da compra: '}</div>
+            <div>{`R$ ${cartProductList.reduce((acc, curr) => {
+              acc += (curr.qty * curr.price);
+              return acc;
+            }, 0).toFixed(2)}`}
+          </div>
         </div>
       </main>
   </Container>
