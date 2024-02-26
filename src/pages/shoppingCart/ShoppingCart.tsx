@@ -46,9 +46,12 @@ function ShoppingCart() {
     const updatedCartProductList = [...cartProductList];
     const productIndex = updatedCartProductList.findIndex((product) => product.id == id);
 
-    if (updatedCartProductList[productIndex].qty > 0) {
+    if (updatedCartProductList[productIndex].qty > 1) {
       updatedCartProductList[productIndex].qty -= 1;
-      setCartProductList(updatedCartProductList);
+      setCartProductList(() => {
+        localStorage.setItem('cartProductList', JSON.stringify(updatedCartProductList));
+        return updatedCartProductList
+      });
     }
   }
 
@@ -62,7 +65,10 @@ function ShoppingCart() {
 
     if (updatedCartProductList[productIndex].qty < updatedCartProductList[productIndex].maximunStock) {
       updatedCartProductList[productIndex].qty += 1;
-      setCartProductList(updatedCartProductList);
+      setCartProductList(() => {
+        localStorage.setItem('cartProductList', JSON.stringify(updatedCartProductList));
+        return updatedCartProductList
+      });
     } else {
       window.alert('maximum stock has been exceeded');
     }
@@ -103,7 +109,7 @@ function ShoppingCart() {
               </div>
               <div className="qty-container">
                 <button
-                  className="qty-button minus"
+                  className="qty-button"
                 >
                   <i
                     id={product.id}
@@ -115,7 +121,7 @@ function ShoppingCart() {
                   {cartProductList[index].qty}
                 </div>
                 <button
-                  className="qty-button plus"
+                  className="qty-button"
                 >
                   <i
                     id={product.id}
@@ -125,7 +131,7 @@ function ShoppingCart() {
                 </button>
               </div>
               <div className="price-container">
-                {product.price}
+                {(product.price * product.qty).toFixed(2)}
               </div>
             </div>
           ))}

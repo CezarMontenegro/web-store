@@ -106,8 +106,35 @@ export const Container = styled.header`
     height: 100%;
     width: 120px;
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
+  }
+
+  .qty-container .qty-button {
+    border: none;
+    font-size: 24px;
+    color: rgb(51, 72, 228);
+    background-color: #e7e7e7;
+    cursor: pointer;
+    display: inline-block;
+    padding: 0;
+  }
+
+  .qty-container .qty-button:active {
+    transform: scale(1.1);
+    font-weight: bolder;
+  }
+
+  .qty-container .qty-amount {
+    font-size: 20px;
+    border: 2px solid rgb(51, 72, 228);
+    color: rgb(29, 39, 112);
+    border-radius: 50%;
+    height: 40x;
+    width: 40px;
+    text-align: center;
+    line-height: 35px;
+    display: inline-block;
   }
 
   .price-container {

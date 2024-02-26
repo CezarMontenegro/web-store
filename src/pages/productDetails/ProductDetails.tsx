@@ -164,7 +164,7 @@ function ProductDetails() {
             </div>
             <div className="qty">
               <button
-                className="qty-button minus"
+                className="qty-button"
                 onClick={handleMinusButton}
               >
                 <i className="fa-solid fa-minus"></i>
@@ -173,7 +173,7 @@ function ProductDetails() {
                 {qty}
               </div>
               <button
-                className="qty-button plus"
+                className="qty-button"
                 onClick={handlePlusButton}
               >
                 <i className="fa-solid fa-plus"></i>
