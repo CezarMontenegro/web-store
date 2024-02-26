@@ -40,6 +40,7 @@ export const Container = styled.div`
   }
 
   .original-price-container {
+    height: 15px;
     padding: 0 10px;
     color: #5e5e5e;
     font-size: 12px;
@@ -64,7 +65,8 @@ export const Container = styled.div`
     color: #54aa4b;
   }
 
-  .shipping {
+  .shipping-container {
+    height: 15px;
     padding: 0 10px;
     font-size: 12px;
     font-weight: bold;
@@ -72,7 +74,6 @@ export const Container = styled.div`
   }
 
   .add-button {
-    border: 1px solid red;
     height: 60px;
     display: flex;
     justify-content: center;

@@ -86,9 +86,14 @@ function APIContextProvider({children}: Props) {
     }
   }
 
-  // export async function getProductsDetails(productId) {
-  //   return (await fetch(`https://api.mercadolibre.com/items/${productId}`)).json();
-  // }
+  async function getProductDetails() {
+    try {
+      const response = await axios(`https://api.mercadolibre.com/items/${id}`)
+      setProductDetails(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   const contextValue = {
     productsList,
