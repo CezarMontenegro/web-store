@@ -1,7 +1,6 @@
 //Libraries
 import { Link, useParams} from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 import { useContext } from 'react';
 
 //Contexts
@@ -13,7 +12,7 @@ import { Container } from './ProductDetails.styles';
 
 //Interfaces
 interface ProductDetails {
-  id: number;
+  id: string;
   thumbnail: string;
   title: string ;
   initial_quantity: number;
@@ -33,19 +32,10 @@ function ProductDetails() {
   const { id } = useParams();
 
   //Global states
-  const { setWasFirstSearchMade } = useContext(APIContext);
+  const { setWasFirstSearchMade, getProductDetails } = useContext(APIContext);
   const { cartProductList, setCartProductList } = useContext(CartContext);
 
   //Functions
-  //Fetch the product details and set the state
-  async function getProductDetails() {
-    try {
-      const response = await axios(`https://api.mercadolibre.com/items/${id}`)
-      setProductDetails(response.data);
-    } catch (error) {
-      console.error(error);
-    }
-  }
 
   //Fetch qty from localStorage according to product ID that comes in the url
   function getLocalStorageQty() {
@@ -65,9 +55,16 @@ function ProductDetails() {
     }
   }
 
+  async function fetchProductDetails() {
+    if (id) {
+      const data = await getProductDetails(id);
+      setProductDetails(data);
+    }
+  }
+
   // Fetch initial data to render the page;
   useEffect(() => {
-    getProductDetails();
+    fetchProductDetails();
     getLocalStorageQty();
   }, []);
 

@@ -12,12 +12,23 @@ interface Category {
 }
 
 interface ProductsList {
-  id: number;
+  id: string;
   thumbnail: string;
   title: string;
   original_price: number;
   price: number;
   shipping: {free_shipping: boolean};
+}
+
+interface ProductDetails {
+  id: string;
+  thumbnail: string;
+  title: string ;
+  initial_quantity: number;
+  original_price: number;
+  price: number;
+  shipping: {free_shipping: boolean};
+  attributes: {id: string, name: string, value_name: string}[];
 }
 
 interface APIContextData {
@@ -33,6 +44,7 @@ interface APIContextData {
   getProductsByCategory: (CATEGORY_ID: string) => Promise<void>;
   getProductByQuery: (QUERY: string) => Promise<void>;
   getProductByCategoryAndQuery: (CATEGORY_ID: string, QUERY: string) => Promise<void>;
+  getProductDetails: (id: string) => Promise<ProductDetails>;
 }
 
 //CRIAÇÃO DO CONTEXTO
@@ -86,10 +98,10 @@ function APIContextProvider({children}: Props) {
     }
   }
 
-  async function getProductDetails() {
+  async function getProductDetails(id: string) {
     try {
       const response = await axios(`https://api.mercadolibre.com/items/${id}`)
-      setProductDetails(response.data);
+      return (response.data);
     } catch (error) {
       console.error(error);
     }
@@ -108,6 +120,7 @@ function APIContextProvider({children}: Props) {
     getProductsByCategory,
     getProductByQuery,
     getProductByCategoryAndQuery,
+    getProductDetails,
   }
 
   return (
