@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { useContext } from 'react';
 
 import { CartContext } from '../../context/CartContext';
+import { APIContext } from '../../context/APIContext';
 
 import { Container } from './Card.styles';
 
@@ -17,6 +18,7 @@ interface Props {
 
 function Card({ id, img, title, originalPrice, price, shipping }: Props) {
   const { cartProductList, setCartProductList } = useContext(CartContext);
+  const { getProductDetails } = useContext(APIContext);
 
   function calculateDiscount() {
     if(originalPrice) {
@@ -24,10 +26,12 @@ function Card({ id, img, title, originalPrice, price, shipping }: Props) {
     }
   }
 
-  function handleButton() {
+  async function handleButton() {
     const isProductAlreadyInCart = cartProductList.some((product) => product.id == id);
 
     if (!isProductAlreadyInCart) {
+      const productDetails = await getProductDetails(id);
+
       const updatedCartProductList = [
         ...cartProductList,
           {
@@ -36,7 +40,7 @@ function Card({ id, img, title, originalPrice, price, shipping }: Props) {
             title,
             price,
             thumbnail: img,
-            maximunStock: 1000,
+            maximunStock: productDetails.initial_quantity,
           }
       ];
       setCartProductList(updatedCartProductList);
