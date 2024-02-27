@@ -25,7 +25,8 @@ function Main() {
   useEffect(() => {
     sortProductListByPrice();
   }, [listOrderOptions])
-  
+
+  console.log(productList)
   return (
     <Container>
       {(!productList.length && !wasFirstSearchMade) && (
@@ -41,11 +42,11 @@ function Main() {
       {productList.length > 0 && (
         <div className="main-container">
           <div className="info"> 
-            <div>{`${productList.length} itens were found`}</div>
+            <div>{`Foram achados ${productList.length} produtos`}</div>
             <div className="dropdown-list">
-              <p>Ordernar por: </p>
+              <p>Ordernar por:</p>
               <select
-                name="order-list"
+                className="order-list"
                 // onChange={(e) => setListOrder(e.target.value as ListOrderOptions)}
                 onChange={(e) => setListOrderOptions(e.target.value as ListOrderOptions)}
               >

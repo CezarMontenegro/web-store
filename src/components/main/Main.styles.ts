@@ -27,6 +27,23 @@ export const Container = styled.main`
 
   .info .dropdown-list {
     display: flex;
+    align-items: center;
+  }
+
+  .dropdown-list select {
+    border: 1px solid #000;
+    border-radius: 5px;
+    padding: 2px;
+    margin-left: 10px;
+    font-weight: bold;
+  }  
+
+  select:active {
+    border: 1px solid #ffe600;
+  }
+
+  select::backdrop {
+    background-color: yellow;
   }
 
   .cards-container {
