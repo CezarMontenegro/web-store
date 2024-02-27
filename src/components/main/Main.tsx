@@ -28,12 +28,12 @@ function Main() {
         </div>
       )}
       {productsList.length > 0 && (
-        <div>
+        <div className="main-container">
           <div className="info"> 
             <div>Total</div>
-            <div>Ordernar por</div>
+            <div>Ordernar por:</div>
           </div>
-          <div>
+          <div className="cards-container">
           {productsList.map((product) => {
           return (
             <Card
