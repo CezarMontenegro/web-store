@@ -8,7 +8,13 @@ import { Container } from './Main.styles';
 
 function Main() {
   const { productsList, wasFirstSearchMade } = useContext(APIContext);
-  
+
+  // function sortProductListByPrice() {
+  //   const sortedProductList = productsList.sort((a, b) => a.price - b.price);
+  //   return sortedProductList;
+  // }
+
+
   return (
     <Container>
       {(!productsList.length && !wasFirstSearchMade) && (
@@ -21,19 +27,30 @@ function Main() {
           Nenhum produto foi encontrado.
         </div>
       )}
-      {(productsList.length > 0) && productsList.map((product) => {
-        return (
-          <Card
-            key={product.id}
-            id={product.id}
-            img={product.thumbnail}
-            title={product.title}
-            originalPrice={product.original_price}
-            price={product.price}
-            shipping={product.shipping.free_shipping}
-          />
-        )
-      })}
+      {productsList.length > 0 && (
+        <div>
+          <div className="info"> 
+            <div>Total</div>
+            <div>Ordernar por</div>
+          </div>
+          <div>
+          {productsList.map((product) => {
+          return (
+            <Card
+                key={product.id}
+                id={product.id}
+                img={product.thumbnail}
+                title={product.title}
+                originalPrice={product.original_price}
+                price={product.price}
+                shipping={product.shipping.free_shipping}
+              />
+          )
+        })}
+          </div>
+        </div>
+
+      )}
     </Container>
   )
 }
