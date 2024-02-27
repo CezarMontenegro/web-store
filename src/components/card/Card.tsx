@@ -70,7 +70,7 @@ function Card({ id, img, title, originalPrice, price, shipping }: Props) {
         </Link>
         <div className="add-button">
           <button onClick={handleButton}>
-            Add Product
+            Adicionar
           </button>
         </div>
       </Container>

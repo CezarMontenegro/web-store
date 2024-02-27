@@ -142,7 +142,7 @@ function ProductDetails() {
       <header>
         <div className="title">
           <Link to="/"><img src="../../public/mercado-livre.svg" alt="logo" onClick={handleLogo}/></Link>
-          <h4>Product Details</h4>
+          <h4>Detalhes do produto</h4>
         </div>
         <div className='nav'>
           <Link to="/shoppingCart"><i className="fa-solid fa-cart-shopping"></i></Link>
@@ -181,13 +181,13 @@ function ProductDetails() {
                 onClick={handleAddButton}
                 disabled={qty < 1}
               >
-                Add Product
+                Adicionar
               </button>
             </div>
           </div>
           <div className="details">
             <div className="details-title">
-              <h4>Features</h4>
+              <h4>Características</h4>
             </div>
             <div className="details-features">
               <ul>

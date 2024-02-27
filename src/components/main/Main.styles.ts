@@ -7,18 +7,15 @@ export const Container = styled.main`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
-  border: 1px solid red;
 
   .main-container {
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
-  border: 1px solid red;
   }
 
   .info {
-    border: 1px solid red;
     height: 30px;
     width: 100%;
     display: flex;
@@ -28,6 +25,10 @@ export const Container = styled.main`
     box-sizing: border-box;
   }
 
+  .info .dropdown-list {
+    display: flex;
+  }
+
   .cards-container {
     height: calc(100% - 30px);
     width: 100%;
@@ -35,6 +36,5 @@ export const Container = styled.main`
     flex-wrap: wrap;
     justify-content: space-evenly;
     overflow-y: scroll;
-    border: 1px solid red;
   }
 `

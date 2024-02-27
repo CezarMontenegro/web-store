@@ -11,13 +11,14 @@ interface Category {
   name: string;
 }
 
-interface ProductsList {
+interface ProductList {
   id: string;
   thumbnail: string;
   title: string;
   original_price: number;
   price: number;
   shipping: {free_shipping: boolean};
+  order_backend: number;
 }
 
 interface ProductDetails {
@@ -32,8 +33,8 @@ interface ProductDetails {
 }
 
 interface APIContextData {
-  productsList: ProductsList[];
-  setProductsList: Dispatch<SetStateAction<ProductsList[]>>
+  productList: ProductList[];
+  setProductList: Dispatch<SetStateAction<ProductList[]>>
   categories: Category[];
   setCategories: Dispatch<SetStateAction<Category[]>>;
   categoryId: string;
@@ -53,7 +54,7 @@ export const APIContext = createContext({} as APIContextData);
 //PROVIDER 
 function APIContextProvider({children}: Props) {
   //ESTADOS
-  const [productsList, setProductsList] = useState<ProductsList[]>([]);
+  const [productList, setProductList] = useState<ProductList[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
   const [categoryId, setCategoryId] = useState<string>('');
   const [wasFirstSearchMade, setWasFirstSearchMade] = useState<boolean>(false);
@@ -71,7 +72,7 @@ function APIContextProvider({children}: Props) {
   const getProductsByCategory = async (CATEGORY_ID: string) => {
     try {
       const response = await axios.get(`https://api.mercadolibre.com/sites/MLB/search?category=${CATEGORY_ID}`);
-      setProductsList(response.data.results);
+      setProductList(response.data.results);
       setCategoryId(CATEGORY_ID);
     } catch (error) {
       console.error(error)
@@ -81,7 +82,7 @@ function APIContextProvider({children}: Props) {
   const getProductByQuery = async (QUERY: string) => {
     try {
       const response = await axios(`https://api.mercadolibre.com/sites/MLB/search?q=${QUERY}`);
-      setProductsList(response.data.results);
+      setProductList(response.data.results);
     } catch (error) {
       console.error('Erro ao obter produtos por consulta:', error);
       throw error;
@@ -91,7 +92,7 @@ function APIContextProvider({children}: Props) {
   const getProductByCategoryAndQuery = async (CATEGORY_ID: string, QUERY: string) => {
     try {
       const response = await axios(`https://api.mercadolibre.com/sites/MLB/search?category=${CATEGORY_ID}&q=${QUERY}`);
-      setProductsList(response.data.results);
+      setProductList(response.data.results);
     } catch (error) {
       console.error('Erro ao obter produtos por categoria e consulta:', error);
       throw error;
@@ -108,8 +109,8 @@ function APIContextProvider({children}: Props) {
   }
 
   const contextValue = {
-    productsList,
-    setProductsList,
+    productList,
+    setProductList,
     categories,
     setCategories,
     categoryId,

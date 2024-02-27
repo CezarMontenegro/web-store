@@ -81,7 +81,7 @@ function ShoppingCart() {
       <header>
         <div className='title'>
           <Link to="/"><img src="../../public/mercado-livre.svg" alt="logo" onClick={handleLogo}/></Link>
-          <h4>Shopping Cart</h4>
+          <h4>Carrinho</h4>
         </div>
         <div className='nav'>
           <div onClick={handleBackArrow}><i className="fa-solid fa-arrow-left"></i></div>
