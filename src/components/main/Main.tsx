@@ -19,16 +19,19 @@ interface ProductList {
 }
 
 function Main() {
-  const [listOrderOption, setListOrderOption] = useState<ListOrderOptions>('relevance');
-  const { productList, setProductList, wasFirstSearchMade } = useContext(APIContext);
+  const { productList, wasFirstSearchMade } = useContext(APIContext);
   const [usableProductList, setUsableProductList] = useState<ProductList[]>([]);
+  const [isChecked, setIsChecked] = useState<boolean>(false)
+  const [listOrderOption, setListOrderOption] = useState<ListOrderOptions>('relevance');
 
+  
   useEffect(() => {
     setUsableProductList(productList);
   }, [productList, listOrderOption]);
 
   useEffect(() => {
     setListOrderOption('relevance');
+    setIsChecked(false)
   }, [productList])
 
   function sortProductListByPrice() {
@@ -47,6 +50,8 @@ function Main() {
 
 
   function filterByFreeShipping(e: React.ChangeEvent<HTMLInputElement>) {
+    setIsChecked((prev) => !prev);
+
     const options = {
       relevance: [...productList].sort((a, b) => a.order_backend - b.order_backend),
       ascending: [...productList].sort((a, b) => a.price - b.price),
@@ -86,6 +91,7 @@ function Main() {
                 <p>Frete Grátis</p>
                 <input 
                   type="checkbox"
+                  checked={isChecked}
                   onChange={(e) => filterByFreeShipping(e)}
                 />
               </div>
