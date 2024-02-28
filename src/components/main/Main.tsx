@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import React, { Dispatch, SetStateAction, useContext, useEffect, useState } from "react";
 
 import Card from "../card/Card";
 
@@ -18,10 +18,15 @@ interface ProductList {
   order_backend: number;
 }
 
-function Main() {
+interface Props {
+  isLoading: boolean;
+  setIsLoading: Dispatch<SetStateAction<boolean>>
+}
+
+function Main({isLoading, setIsLoading} : Props) {
   const { productList, wasFirstSearchMade } = useContext(APIContext);
   const [usableProductList, setUsableProductList] = useState<ProductList[]>([]);
-  const [isChecked, setIsChecked] = useState<boolean>(false)
+  const [isChecked, setIsChecked] = useState<boolean>(false);
   const [listOrderOption, setListOrderOption] = useState<ListOrderOptions>('relevance');
 
   
@@ -31,7 +36,8 @@ function Main() {
 
   useEffect(() => {
     setListOrderOption('relevance');
-    setIsChecked(false)
+    setIsChecked(false);
+    setIsLoading(false);
   }, [productList])
 
   function sortProductListByPrice() {
@@ -72,17 +78,24 @@ function Main() {
   console.log(productList)
   return (
     <Container>
-      {(!usableProductList.length && !wasFirstSearchMade) && (
+      { isLoading && (
+        <div>
+          Carregando...
+        </div>
+      )
+
+      }
+      {(!usableProductList.length && !wasFirstSearchMade && !isLoading) && (
         <div>
           Digite o nome de um produto ou escolha uma categoria.
         </div>
       )}
-      {(!usableProductList.length && wasFirstSearchMade) && (
+      {(!usableProductList.length && wasFirstSearchMade && !isLoading) && (
         <div>
           Nenhum produto foi encontrado.
         </div>
       )}
-      {usableProductList.length > 0 && (
+      {(usableProductList.length > 0 && !isLoading) && (
         <div className="main-container">
           <div className="info"> 
             <div>{`Foram achados ${productList.length} produtos`}</div>

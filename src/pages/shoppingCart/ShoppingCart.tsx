@@ -87,6 +87,12 @@ function ShoppingCart() {
           <div onClick={handleBackArrow}><i className="fa-solid fa-arrow-left"></i></div>
         </div>
       </header>
+      {(cartProductList.length) == 0 && 
+        <div>
+          Seu carrinho está vazio
+        </div>
+      }
+      {(cartProductList.length > 0) &&
       <main>
         <div className="cart-list">
           {cartProductList.map((product, index) => (
@@ -145,7 +151,8 @@ function ShoppingCart() {
           </div>
         </div>
       </main>
-  </Container>
+      }
+    </Container>
   )
 }
 

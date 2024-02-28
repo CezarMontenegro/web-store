@@ -1,11 +1,15 @@
-import { useContext, useState  } from 'react';
+import { useContext, useState, Dispatch, SetStateAction  } from 'react';
 import { Link } from 'react-router-dom';
 
 import { APIContext } from '../../context/APIContext';
 
 import { Container } from './Header.styles';
 
-function Header() {
+interface Props {
+  setIsLoading: Dispatch<SetStateAction<boolean>>;
+}
+
+function Header({setIsLoading}: Props) {
   const [query, setQuery] = useState<string>('');
 
   const { categoryId, setWasFirstSearchMade, setProductList, getProductByQuery, getProductByCategoryAndQuery } = useContext(APIContext);
@@ -17,6 +21,7 @@ function Header() {
 
   function handleQuery() {
     categoryId.length ? getProductByCategoryAndQuery(categoryId, query) : getProductByQuery(query);
+    setIsLoading(true);
     setWasFirstSearchMade(true);
   }
   
