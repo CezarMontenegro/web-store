@@ -8,56 +8,103 @@ import { Container } from './Main.styles';
 
 type ListOrderOptions = 'ascending' | 'descending' | 'relevance';
 
+interface ProductList {
+  id: string;
+  thumbnail: string;
+  title: string;
+  original_price: number;
+  price: number;
+  shipping: {free_shipping: boolean};
+  order_backend: number;
+}
+
 function Main() {
-  const [listOrderOptions, setListOrderOptions] = useState<ListOrderOptions>('relevance');
+  const [listOrderOption, setListOrderOption] = useState<ListOrderOptions>('relevance');
   const { productList, setProductList, wasFirstSearchMade } = useContext(APIContext);
+  const [usableProductList, setUsableProductList] = useState<ProductList[]>([]);
+
+  useEffect(() => {
+    setUsableProductList(productList);
+  }, [productList, listOrderOption]);
+
+  useEffect(() => {
+    setListOrderOption('relevance');
+  }, [productList])
 
   function sortProductListByPrice() {
+    const options = {
+      relevance: [...usableProductList].sort((a, b) => a.order_backend - b.order_backend),
+      ascending: [...usableProductList].sort((a, b) => a.price - b.price),
+      descending: [...usableProductList].sort((a, b) => b.price - a.price),
+    }
+
+    const updatedProductList = options[listOrderOption];
+    setUsableProductList(updatedProductList);
+  }
+  useEffect(() => {
+    sortProductListByPrice();
+  }, [listOrderOption]);
+
+
+  function filterByFreeShipping(e: React.ChangeEvent<HTMLInputElement>) {
     const options = {
       relevance: [...productList].sort((a, b) => a.order_backend - b.order_backend),
       ascending: [...productList].sort((a, b) => a.price - b.price),
       descending: [...productList].sort((a, b) => b.price - a.price),
     }
 
-    const updatedProductList = options[listOrderOptions];
-    setProductList(updatedProductList);
+    if (e.target.checked) {
+      const updatedProductList = options[listOrderOption].filter((product) => product.shipping.free_shipping === true);
+      setUsableProductList(updatedProductList);
+    }  
+    
+    if (!e.target.checked) {
+      const updatedProductList = options[listOrderOption];
+      setUsableProductList(updatedProductList);
+    }
   }
-  useEffect(() => {
-    sortProductListByPrice();
-  }, [listOrderOptions])
-
+  
   console.log(productList)
   return (
     <Container>
-      {(!productList.length && !wasFirstSearchMade) && (
+      {(!usableProductList.length && !wasFirstSearchMade) && (
         <div>
           Digite o nome de um produto ou escolha uma categoria.
         </div>
       )}
-      {(!productList.length && wasFirstSearchMade) && (
+      {(!usableProductList.length && wasFirstSearchMade) && (
         <div>
           Nenhum produto foi encontrado.
         </div>
       )}
-      {productList.length > 0 && (
+      {usableProductList.length > 0 && (
         <div className="main-container">
           <div className="info"> 
             <div>{`Foram achados ${productList.length} produtos`}</div>
-            <div className="dropdown-list">
-              <p>Ordernar por:</p>
-              <select
-                className="order-list"
-                // onChange={(e) => setListOrder(e.target.value as ListOrderOptions)}
-                onChange={(e) => setListOrderOptions(e.target.value as ListOrderOptions)}
-              >
-                <option value="relevance">Relevância</option>
-                <option value="ascending">Menor Preço</option>
-                <option value="descending">Maior Preço</option>
-              </select>
+            <div className="filter-order-container">
+              <div className="filter">
+                <p>Frete Grátis</p>
+                <input 
+                  type="checkbox"
+                  onChange={(e) => filterByFreeShipping(e)}
+                />
+              </div>
+              <div className="dropdown-list">
+                <p>Ordernar por:</p>
+                <select
+                  className="order-list"
+                  value={listOrderOption}
+                  onChange={(e) => setListOrderOption(e.target.value as ListOrderOptions)}
+                >
+                  <option value="relevance">Relevância</option>
+                  <option value="ascending">Menor Preço</option>
+                  <option value="descending">Maior Preço</option>
+                </select>
+              </div>
             </div>
           </div>
           <div className="cards-container">
-          {productList.map((product) => {
+          {usableProductList.map((product) => {
           return (
             <Card
                 key={product.id}

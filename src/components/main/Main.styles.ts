@@ -25,7 +25,22 @@ export const Container = styled.main`
     box-sizing: border-box;
   }
 
+  .info .filter-order-container {
+    display: flex;
+    align-items: center;
+  }
+
+  .info .filter {
+    display: flex;
+    align-items: center;
+  }
+
+  .filter p {
+    margin-right: 5px;
+  }
+
   .info .dropdown-list {
+    margin-left: 20px;
     display: flex;
     align-items: center;
   }

@@ -8,11 +8,11 @@ import { Container } from './Header.styles';
 function Header() {
   const [query, setQuery] = useState<string>('');
 
-  const { categoryId, setWasFirstSearchMade, setProductsList, getProductByQuery, getProductByCategoryAndQuery } = useContext(APIContext);
+  const { categoryId, setWasFirstSearchMade, setProductList, getProductByQuery, getProductByCategoryAndQuery } = useContext(APIContext);
 
   function handleLogo() {
     setWasFirstSearchMade(false);
-    setProductsList([]);
+    setProductList([]);
   }
 
   function handleQuery() {
