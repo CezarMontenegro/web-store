@@ -49,7 +49,6 @@ export const Container = styled.header`
   }
 
   .product-container {
-    border: 1px solid blue;
     display: flex;
     margin-bottom: 10px;
     height: 100px;
@@ -57,7 +56,6 @@ export const Container = styled.header`
   }
 
   .trash-container {
-    border: 1px solid red;
     width: 60px;
     height: 100%;
     display: flex;
@@ -78,7 +76,6 @@ export const Container = styled.header`
   }
 
   .thumb-container {
-    border: 1px solid red;
     height: 100%;
     width: 100px;
     display: flex;
@@ -92,7 +89,6 @@ export const Container = styled.header`
   }
 
   .title-container {
-    border: 1px solid red;
     height: 100%;
     width: 200px;
     display: flex;
@@ -102,18 +98,63 @@ export const Container = styled.header`
   }
 
   .qty-container {
-    border: 1px solid red;
+    height: 100%;
+    width: 120px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+
+  .qty-container .qty-button {
+    border: none;
+    font-size: 24px;
+    color: rgb(51, 72, 228);
+    background-color: #e7e7e7;
+    cursor: pointer;
+    display: inline-block;
+    padding: 0;
+  }
+
+  .qty-container .qty-button:active {
+    transform: scale(1.1);
+    font-weight: bolder;
+  }
+
+  .qty-container .qty-amount {
+    font-size: 20px;
+    border: 2px solid rgb(51, 72, 228);
+    color: rgb(29, 39, 112);
+    border-radius: 50%;
+    height: 40x;
+    width: 40px;
+    text-align: center;
+    line-height: 35px;
+    display: inline-block;
+  }
+
+  .price-container {
     height: 100%;
     width: 120px;
     display: flex;
     justify-content: center;
     align-items: center;
+    font-weight: bolder;
   }
 
-  .price-container {
-    border: 1px solid red;
-    height: 100%;
-    width: 120px;
+  .total-price-container {
+    margin-left: 20px;
+    margin-top: 10px;
+    width: 600px;
+    height: 50px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: bold;
+    font-size: 24px
   }
 
+  .total-price-container div:last-child {
+    margin-right: 20px;
+  }
 `

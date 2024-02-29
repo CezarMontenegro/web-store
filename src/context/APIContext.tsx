@@ -11,18 +11,30 @@ interface Category {
   name: string;
 }
 
-interface ProductsList {
-  id: number;
+interface ProductList {
+  id: string;
   thumbnail: string;
   title: string;
   original_price: number;
   price: number;
   shipping: {free_shipping: boolean};
+  order_backend: number;
+}
+
+interface ProductDetails {
+  id: string;
+  thumbnail: string;
+  title: string ;
+  initial_quantity: number;
+  original_price: number;
+  price: number;
+  shipping: {free_shipping: boolean};
+  attributes: {id: string, name: string, value_name: string}[];
 }
 
 interface APIContextData {
-  productsList: ProductsList[];
-  setProductsList: Dispatch<SetStateAction<ProductsList[]>>
+  productList: ProductList[];
+  setProductList: Dispatch<SetStateAction<ProductList[]>>
   categories: Category[];
   setCategories: Dispatch<SetStateAction<Category[]>>;
   categoryId: string;
@@ -33,6 +45,7 @@ interface APIContextData {
   getProductsByCategory: (CATEGORY_ID: string) => Promise<void>;
   getProductByQuery: (QUERY: string) => Promise<void>;
   getProductByCategoryAndQuery: (CATEGORY_ID: string, QUERY: string) => Promise<void>;
+  getProductDetails: (id: string) => Promise<ProductDetails>;
 }
 
 //CRIAÇÃO DO CONTEXTO
@@ -41,7 +54,7 @@ export const APIContext = createContext({} as APIContextData);
 //PROVIDER 
 function APIContextProvider({children}: Props) {
   //ESTADOS
-  const [productsList, setProductsList] = useState<ProductsList[]>([]);
+  const [productList, setProductList] = useState<ProductList[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
   const [categoryId, setCategoryId] = useState<string>('');
   const [wasFirstSearchMade, setWasFirstSearchMade] = useState<boolean>(false);
@@ -59,7 +72,7 @@ function APIContextProvider({children}: Props) {
   const getProductsByCategory = async (CATEGORY_ID: string) => {
     try {
       const response = await axios.get(`https://api.mercadolibre.com/sites/MLB/search?category=${CATEGORY_ID}`);
-      setProductsList(response.data.results);
+      setProductList(response.data.results);
       setCategoryId(CATEGORY_ID);
     } catch (error) {
       console.error(error)
@@ -69,7 +82,7 @@ function APIContextProvider({children}: Props) {
   const getProductByQuery = async (QUERY: string) => {
     try {
       const response = await axios(`https://api.mercadolibre.com/sites/MLB/search?q=${QUERY}`);
-      setProductsList(response.data.results);
+      setProductList(response.data.results);
     } catch (error) {
       console.error('Erro ao obter produtos por consulta:', error);
       throw error;
@@ -79,20 +92,25 @@ function APIContextProvider({children}: Props) {
   const getProductByCategoryAndQuery = async (CATEGORY_ID: string, QUERY: string) => {
     try {
       const response = await axios(`https://api.mercadolibre.com/sites/MLB/search?category=${CATEGORY_ID}&q=${QUERY}`);
-      setProductsList(response.data.results);
+      setProductList(response.data.results);
     } catch (error) {
       console.error('Erro ao obter produtos por categoria e consulta:', error);
       throw error;
     }
   }
 
-  // export async function getProductsDetails(productId) {
-  //   return (await fetch(`https://api.mercadolibre.com/items/${productId}`)).json();
-  // }
+  async function getProductDetails(id: string) {
+    try {
+      const response = await axios(`https://api.mercadolibre.com/items/${id}`)
+      return (response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   const contextValue = {
-    productsList,
-    setProductsList,
+    productList,
+    setProductList,
     categories,
     setCategories,
     categoryId,
@@ -103,6 +121,7 @@ function APIContextProvider({children}: Props) {
     getProductsByCategory,
     getProductByQuery,
     getProductByCategoryAndQuery,
+    getProductDetails,
   }
 
   return (

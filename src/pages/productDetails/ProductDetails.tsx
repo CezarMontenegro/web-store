@@ -1,7 +1,6 @@
 //Libraries
 import { Link, useParams} from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 import { useContext } from 'react';
 
 //Contexts
@@ -13,7 +12,7 @@ import { Container } from './ProductDetails.styles';
 
 //Interfaces
 interface ProductDetails {
-  id: number;
+  id: string;
   thumbnail: string;
   title: string ;
   initial_quantity: number;
@@ -33,19 +32,10 @@ function ProductDetails() {
   const { id } = useParams();
 
   //Global states
-  const { setWasFirstSearchMade } = useContext(APIContext);
+  const { setWasFirstSearchMade, getProductDetails } = useContext(APIContext);
   const { cartProductList, setCartProductList } = useContext(CartContext);
 
   //Functions
-  //Fetch the product details and set the state
-  async function getProductDetails() {
-    try {
-      const response = await axios(`https://api.mercadolibre.com/items/${id}`)
-      setProductDetails(response.data);
-    } catch (error) {
-      console.error(error);
-    }
-  }
 
   //Fetch qty from localStorage according to product ID that comes in the url
   function getLocalStorageQty() {
@@ -65,9 +55,16 @@ function ProductDetails() {
     }
   }
 
+  async function fetchProductDetails() {
+    if (id) {
+      const data = await getProductDetails(id);
+      setProductDetails(data);
+    }
+  }
+
   // Fetch initial data to render the page;
   useEffect(() => {
-    getProductDetails();
+    fetchProductDetails();
     getLocalStorageQty();
   }, []);
 
@@ -118,6 +115,7 @@ function ProductDetails() {
             title: productDetails.title,
             price: productDetails.price,
             thumbnail: productDetails.thumbnail,
+            maximunStock,
           }
       ];
       setCartProductList(updatedCartProductList);
@@ -137,14 +135,13 @@ function ProductDetails() {
   useEffect(() => {
     localStorage.setItem('cartProductList', JSON.stringify(cartProductList));
   }, [cartProductList])
-
-  // console.log(cartProductList)
+  
   return (
     <Container>
       <header>
         <div className="title">
           <Link to="/"><img src="../../public/mercado-livre.svg" alt="logo" onClick={handleLogo}/></Link>
-          <h4>Product Details</h4>
+          <h4>Detalhes do produto</h4>
         </div>
         <div className='nav'>
           <Link to="/shoppingCart"><i className="fa-solid fa-cart-shopping"></i></Link>
@@ -163,7 +160,7 @@ function ProductDetails() {
             </div>
             <div className="qty">
               <button
-                className="qty-button minus"
+                className="qty-button"
                 onClick={handleMinusButton}
               >
                 <i className="fa-solid fa-minus"></i>
@@ -172,7 +169,7 @@ function ProductDetails() {
                 {qty}
               </div>
               <button
-                className="qty-button plus"
+                className="qty-button"
                 onClick={handlePlusButton}
               >
                 <i className="fa-solid fa-plus"></i>
@@ -183,13 +180,13 @@ function ProductDetails() {
                 onClick={handleAddButton}
                 disabled={qty < 1}
               >
-                Add Product
+                Adicionar
               </button>
             </div>
           </div>
           <div className="details">
             <div className="details-title">
-              <h4>Features</h4>
+              <h4>Características</h4>
             </div>
             <div className="details-features">
               <ul>

@@ -135,6 +135,7 @@ export const Container = styled.div`
     background-color: rgb(51, 72, 228);
     color: #fff;
     border: none;
+    border-radius: 5px;
     height: 45px;
     width: 180px;
     cursor: pointer;

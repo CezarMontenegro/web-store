@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import Header from '../../components/header/Header';
 import Main from '../../components/main/Main';
@@ -10,6 +10,7 @@ import { APIContext } from '../../context/APIContext';
 import { Container } from './Home.styles';
 
 function Home() {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const {
     getCategories,
@@ -21,10 +22,10 @@ function Home() {
 
   return (
     <>
-      <Header />
+      <Header setIsLoading={setIsLoading}/>
       <Container>
-        <Nav />
-        <Main />
+        <Nav setIsLoading={setIsLoading}/>
+        <Main setIsLoading={setIsLoading} isLoading={isLoading}/>
       </Container>
       <Footer />
     </>

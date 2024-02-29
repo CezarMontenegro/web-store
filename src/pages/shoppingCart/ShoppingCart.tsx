@@ -1,6 +1,6 @@
 //Libraries
 import { Link, useNavigate } from 'react-router-dom';
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 
 //Contexts
 import { APIContext } from '../../context/APIContext';
@@ -39,31 +39,40 @@ function ShoppingCart() {
   }
 
   //Decreases qty and save it on localStorage
-  function handleMinusButton(index: number) {
-    // if (qty > 0) {
-    //   setQty((prev) => {
-    //     const updatedQty = prev - 1;
-    //     localStorage.setItem(`${id}`, JSON.stringify(updatedQty));
-    //     return updatedQty;
-    //   });
-    // }
-    cartProductList[index].qty -= 1;
-    localStorage.setItem('cartProductList', JSON.stringify(cartProductList));
+  function handleMinusButton(e: React.MouseEvent<HTMLElement>) {
+    const target = e.target as HTMLElement
+    const id = target.id;
+
+    const updatedCartProductList = [...cartProductList];
+    const productIndex = updatedCartProductList.findIndex((product) => product.id == id);
+
+    if (updatedCartProductList[productIndex].qty > 1) {
+      updatedCartProductList[productIndex].qty -= 1;
+      setCartProductList(() => {
+        localStorage.setItem('cartProductList', JSON.stringify(updatedCartProductList));
+        return updatedCartProductList
+      });
+    }
   }
 
   //Increases qty and save it on localStorage
-  function handlePlusButton(index: number) {
-    // if (qty < maximunStock) {
-    //   setQty((prev) => {
-    //     const updatedQty = prev + 1;
-    //     localStorage.setItem(`${id}`, JSON.stringify(updatedQty));
-    //     return updatedQty;
-    //   });
-    // } else {
-    //   window.alert('maximum stock has been exceeded');
-    // }
-    cartProductList[index].qty += 1;
-    localStorage.setItem('cartProductList', JSON.stringify(cartProductList));
+  function handlePlusButton(e: React.MouseEvent<HTMLElement>) {
+    const target = e.target as HTMLElement
+    const id = target.id;
+
+    const updatedCartProductList = [...cartProductList];
+    const productIndex = updatedCartProductList.findIndex((product) => product.id == id);
+
+    if (updatedCartProductList[productIndex].qty < updatedCartProductList[productIndex].maximunStock) {
+      updatedCartProductList[productIndex].qty += 1;
+      setCartProductList(() => {
+        localStorage.setItem('cartProductList', JSON.stringify(updatedCartProductList));
+        return updatedCartProductList
+      });
+    } else {
+      window.alert('maximum stock has been exceeded');
+    }
+
   }
 
   console.log(cartProductList);
@@ -72,12 +81,18 @@ function ShoppingCart() {
       <header>
         <div className='title'>
           <Link to="/"><img src="../../public/mercado-livre.svg" alt="logo" onClick={handleLogo}/></Link>
-          <h4>Shopping Cart</h4>
+          <h4>Carrinho</h4>
         </div>
         <div className='nav'>
           <div onClick={handleBackArrow}><i className="fa-solid fa-arrow-left"></i></div>
         </div>
       </header>
+      {(cartProductList.length) == 0 && 
+        <div>
+          Seu carrinho está vazio
+        </div>
+      }
+      {(cartProductList.length > 0) &&
       <main>
         <div className="cart-list">
           {cartProductList.map((product, index) => (
@@ -86,42 +101,58 @@ function ShoppingCart() {
                 <button
                 >
                   <i 
-                  id={product.id}
-                  onClick={(e) => handleTrashButton(e)}
-                  className="fa-solid fa-trash"></i>
+                    id={product.id}
+                    onClick={(e) => handleTrashButton(e)}
+                    className="fa-solid fa-trash">
+                  </i>
                 </button>
               </div>
               <div className="thumb-container">
-                <img src={product.thumbnail} alt={product.title} />
+                <Link to={`/productDetails/${product.id}`}><img src={product.thumbnail} alt={product.title} /></Link>
               </div>
               <div className="title-container">
                 {product.title}
               </div>
               <div className="qty-container">
                 <button
-                  className="qty-button minus"
-                  onClick={() => handleMinusButton(index)}
+                  className="qty-button"
                 >
-                  <i className="fa-solid fa-minus"></i>
+                  <i
+                    id={product.id}
+                    onClick={(e) => handleMinusButton(e)}
+                    className="fa-solid fa-minus">
+                  </i>
                 </button>
                 <div className="qty-amount">
                   {cartProductList[index].qty}
                 </div>
                 <button
-                  className="qty-button plus"
-                  onClick={() => handlePlusButton(index)}
+                  className="qty-button"
                 >
-                  <i className="fa-solid fa-plus"></i>
+                  <i
+                    id={product.id}
+                    onClick={(e) => handlePlusButton(e)}
+                    className="fa-solid fa-plus">
+                  </i>
                 </button>
               </div>
               <div className="price-container">
-                {product.price}
+                {`R$ ${(product.price * product.qty).toFixed(2)}`}
               </div>
             </div>
           ))}
         </div>
+        <div className="total-price-container">
+          <div>{'Valor total da compra: '}</div>
+            <div>{`R$ ${cartProductList.reduce((acc, curr) => {
+              acc += (curr.qty * curr.price);
+              return acc;
+            }, 0).toFixed(2)}`}
+          </div>
+        </div>
       </main>
-  </Container>
+      }
+    </Container>
   )
 }
 
