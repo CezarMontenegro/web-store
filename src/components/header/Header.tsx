@@ -27,7 +27,10 @@ function Header({setIsLoading}: Props) {
   
   return (
     <Container>
-      <img src="../../public/mercado-livre.svg" alt="logo" onClick={handleLogo}/>
+      <div className="left-menu">
+        <i className="fa-solid fa-bars"></i>
+        <img src="../../public/mercado-livre.svg" alt="logo" onClick={handleLogo}/>
+      </div>
       <div className='search-container'>
         <input
           type="text"

@@ -10,7 +10,19 @@ export const Container = styled.header`
   background-color: #ffe600;
   padding: 0 40px;
   
-  img {
+  .left-menu {
+    border: 1px solid red;
+    width: 200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .left-menu i {
+    margin: 0;
+  }
+
+  .left-menu img {
     width: 100px;
     height: 50px;
     cursor: pointer;
@@ -92,5 +104,21 @@ export const Container = styled.header`
     font-size: 30px;
     margin-left: 40px;
     cursor: pointer;
+  }
+
+  @media (min-width: 769px) {
+    /* padding: 0 10px; */
+
+    .left-menu i {
+      display: none;
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: 0 10px;
+
+    .left-menu img {
+      margin-right: 30px;
+    }
   }
 `
