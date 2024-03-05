@@ -20,6 +20,7 @@ export const Container = styled.header`
 
   .left-menu i {
     margin: 0;
+    cursor: pointer;
   }
 
   .left-menu img {

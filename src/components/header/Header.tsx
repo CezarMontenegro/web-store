@@ -7,12 +7,18 @@ import { Container } from './Header.styles';
 
 interface Props {
   setIsLoading: Dispatch<SetStateAction<boolean>>;
+  setIsNavShown: Dispatch<SetStateAction<boolean>>;
 }
 
-function Header({setIsLoading}: Props) {
+function Header({setIsLoading, setIsNavShown}: Props) {
   const [query, setQuery] = useState<string>('');
 
+
   const { categoryId, setWasFirstSearchMade, setProductList, getProductByQuery, getProductByCategoryAndQuery } = useContext(APIContext);
+
+  function handleHamburguer() {
+    setIsNavShown(prev => !prev);
+  }
 
   function handleLogo() {
     setWasFirstSearchMade(false);
@@ -28,7 +34,10 @@ function Header({setIsLoading}: Props) {
   return (
     <Container>
       <div className="left-menu">
-        <i className="fa-solid fa-bars"></i>
+        <i
+          className="fa-solid fa-bars"
+          onClick={handleHamburguer}
+        ></i>
         <img src="../../public/mercado-livre.svg" alt="logo" onClick={handleLogo}/>
       </div>
       <div className='search-container'>

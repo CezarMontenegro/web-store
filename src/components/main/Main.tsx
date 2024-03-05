@@ -74,7 +74,6 @@ function Main({isLoading, setIsLoading} : Props) {
     }
   }
   
-  console.log(productList)
   return (
     <Container>
       { isLoading && (
