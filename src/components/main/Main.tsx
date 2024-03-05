@@ -29,7 +29,6 @@ function Main({isLoading, setIsLoading} : Props) {
   const [isChecked, setIsChecked] = useState<boolean>(false);
   const [listOrderOption, setListOrderOption] = useState<ListOrderOptions>('relevance');
 
-  
   useEffect(() => {
     setUsableProductList(productList);
   }, [productList, listOrderOption]);
@@ -38,7 +37,7 @@ function Main({isLoading, setIsLoading} : Props) {
     setListOrderOption('relevance');
     setIsChecked(false);
     setIsLoading(false);
-  }, [productList])
+  }, [productList]);
 
   function sortProductListByPrice() {
     const options = {

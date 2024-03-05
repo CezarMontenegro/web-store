@@ -16,4 +16,8 @@ export const Container = styled.nav`
   p:hover {
     font-weight: bold;
   }
+
+  @media (max-width:768px) {
+    display: none;
+  }
 `

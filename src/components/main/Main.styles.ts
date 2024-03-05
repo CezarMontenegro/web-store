@@ -13,6 +13,7 @@ export const Container = styled.main`
   height: 100%;
   display: flex;
   flex-direction: column;
+  border: 1px solid red;
   }
 
   .info {
@@ -23,6 +24,7 @@ export const Container = styled.main`
     align-items: center;
     padding: 0 30px;
     box-sizing: border-box;
+    border: 1px solid red;
   }
 
   .info .filter-order-container {
@@ -69,4 +71,9 @@ export const Container = styled.main`
     justify-content: space-evenly;
     overflow-y: scroll;
   }
+
+  @media (max-width: 768px) {
+    width: 100vw;
+  }
+
 `
