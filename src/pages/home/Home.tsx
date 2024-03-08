@@ -26,7 +26,7 @@ function Home() {
     <>
       <Header setIsLoading={setIsLoading} setIsNavShown={setIsNavShown}/>
       <Container>
-        <Nav setIsLoading={setIsLoading}/>
+        <Nav setIsLoading={setIsLoading} isNavShown={isNavShown}/>
         <Main setIsLoading={setIsLoading} isLoading={isLoading}/>
       </Container>
       <Footer />

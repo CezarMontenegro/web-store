@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 
-export const Container = styled.nav`
+interface Props {
+  isNavShown: boolean;
+}
+
+export const Container = styled.nav<Props>`
   height: 100%;
   width: 250px;
   padding-left: 10px;
@@ -17,7 +21,10 @@ export const Container = styled.nav`
     font-weight: bold;
   }
 
+  //tablet size
   @media (max-width:768px) {
-    display: none;
+    display: ${(props) => props.isNavShown ? '' : 'none'};
   }
+
+  
 `

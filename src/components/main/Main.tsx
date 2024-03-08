@@ -96,7 +96,7 @@ function Main({isLoading, setIsLoading} : Props) {
       {(usableProductList.length > 0 && !isLoading) && (
         <div className="main-container">
           <div className="info"> 
-            <div>{`Foram achados ${productList.length} produtos`}</div>
+            <div className="product-qty">{`Foram achados ${productList.length} produtos`}</div>
             <div className="filter-order-container">
               <div className="filter">
                 <p>Frete Grátis</p>

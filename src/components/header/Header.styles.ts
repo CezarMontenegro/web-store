@@ -11,7 +11,6 @@ export const Container = styled.header`
   padding: 0 40px;
   
   .left-menu {
-    border: 1px solid red;
     width: 200px;
     display: flex;
     justify-content: space-between;
@@ -107,9 +106,8 @@ export const Container = styled.header`
     cursor: pointer;
   }
 
+  //tablet
   @media (min-width: 769px) {
-    /* padding: 0 10px; */
-
     .left-menu i {
       display: none;
     }
@@ -122,4 +120,19 @@ export const Container = styled.header`
       margin-right: 30px;
     }
   }
+
+  //mobile L
+  @media (max-width: 425px) {
+    height: 100px;
+    flex-wrap: wrap;
+
+    .search-container {
+      order: 3;
+      width: 95%;
+      margin: 0 auto;
+    }
+  }
+
+  //mobile S
+  
 `

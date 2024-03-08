@@ -13,7 +13,6 @@ export const Container = styled.main`
   height: 100%;
   display: flex;
   flex-direction: column;
-  border: 1px solid red;
   }
 
   .info {
@@ -24,7 +23,6 @@ export const Container = styled.main`
     align-items: center;
     padding: 0 30px;
     box-sizing: border-box;
-    border: 1px solid red;
   }
 
   .info .filter-order-container {
@@ -72,8 +70,19 @@ export const Container = styled.main`
     overflow-y: scroll;
   }
 
+  //tablet size
   @media (max-width: 768px) {
     width: 100vw;
   }
 
+  //mobile L
+  @media (max-width: 425px) {
+    .info {
+      font-size: 13px;
+    }
+
+    .product-qty {
+      display: none;
+    }
+  }
 `
