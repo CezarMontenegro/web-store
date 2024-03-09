@@ -16,10 +16,6 @@ function Header({setIsLoading, setIsNavShown}: Props) {
 
   const { categoryId, setWasFirstSearchMade, setProductList, getProductByQuery, getProductByCategoryAndQuery } = useContext(APIContext);
 
-  function handleHamburguer() {
-    setIsNavShown(prev => !prev);
-  }
-
   function handleLogo() {
     setWasFirstSearchMade(false);
     setProductList([]);
@@ -36,7 +32,8 @@ function Header({setIsLoading, setIsNavShown}: Props) {
       <div className="left-menu">
         <i
           className="fa-solid fa-bars"
-          onClick={handleHamburguer}
+          onMouseEnter={() => setIsNavShown(true)}
+          // onMouseLeave={() => setIsNavShown(false)}
         ></i>
         <img src="../../public/mercado-livre.svg" alt="logo" onClick={handleLogo}/>
       </div>

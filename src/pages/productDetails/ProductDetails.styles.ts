@@ -47,6 +47,7 @@ export const Container = styled.div`
     padding: 20px 40px;
     box-sizing: border-box;
     background-color: #e7e7e7;
+    overflow-y: scroll;
   }
 
   .price {
@@ -55,6 +56,7 @@ export const Container = styled.div`
     display: flex;
     justify-content: left;
     align-items: center;
+    border: 1px solid red;
   }
 
   .price h4 {
@@ -205,9 +207,29 @@ export const Container = styled.div`
     border: 1px solid blue;
   }
 
-  .avaliations {
-    border: 1px solid red;
-    height: 30%;
+  @media (max-width: 700px) {
+    .price {
+      height: 12%;
+    }
   }
 
+  //mobile L
+  @media (max-width: 425px) {
+    header .title h4 {
+      display: none;
+    }
+
+    .price {
+      height: 18%;
+    }
+
+    .product {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .product .card {
+      margin-bottom: 10px
+    }
+  }
 `

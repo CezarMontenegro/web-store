@@ -6,10 +6,11 @@ import { Container } from './Nav.styles';
 
 interface Props {
   setIsLoading: Dispatch<SetStateAction<boolean>>;
+  setIsNavShown: Dispatch<SetStateAction<boolean>>;
   isNavShown: boolean;
 }
 
-function Nav({setIsLoading, isNavShown}: Props) {
+function Nav({setIsLoading, isNavShown, setIsNavShown}: Props) {
   const {categories, getProductsByCategory} = useContext(APIContext);
 
   function handleClick(id: string) {
@@ -18,7 +19,7 @@ function Nav({setIsLoading, isNavShown}: Props) {
   }
 
   return (
-    <Container isNavShown={isNavShown}>
+    <Container isNavShown={isNavShown} onMouseLeave={() => setIsNavShown(false)}>
       {categories.map((category) => {
         return (
           <p

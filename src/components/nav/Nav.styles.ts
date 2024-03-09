@@ -25,6 +25,7 @@ export const Container = styled.nav<Props>`
   //tablet size
   @media (max-width:768px) {
     display: ${(props) => props.isNavShown ? '' : 'none'};
+    position: absolute;
   }
 
 

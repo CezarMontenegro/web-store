@@ -19,8 +19,10 @@ export const Container = styled.header`
   }
 
   .left-menu i {
-    margin: 0;
+    font-size: 30px;
+    margin: 20px;
     cursor: pointer;
+    display: none;
   }
 
   .left-menu img {
@@ -62,7 +64,7 @@ export const Container = styled.header`
 
   .search-container button i {
     font-size: 16px;
-    margin: 0px;    
+    margin: 0px;
   }
 
   .search-container input[type=text] {
@@ -101,21 +103,23 @@ export const Container = styled.header`
     color: #000;
   }
 
-  i {
+  .nav-header i {
     font-size: 30px;
     margin-left: 40px;
     cursor: pointer;
   }
 
-  //tablet
-  @media (min-width: 769px) {
-    .left-menu i {
-      display: none;
-    }
+  i:hover {
+    color: blue;
   }
 
+  //tablet
   @media (max-width: 768px) {
     padding: 0 10px;
+
+    .left-menu i {
+      display: inline-block;
+    }
 
     .left-menu img {
       margin-right: 30px;
