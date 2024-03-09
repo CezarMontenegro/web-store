@@ -7,6 +7,7 @@ interface Props {
 export const Container = styled.nav<Props>`
   height: 100%;
   width: 250px;
+  min-width: 250px;
   padding-left: 10px;
   display: flex;
   flex-direction: column;
@@ -26,5 +27,5 @@ export const Container = styled.nav<Props>`
     display: ${(props) => props.isNavShown ? '' : 'none'};
   }
 
-  
+
 `
