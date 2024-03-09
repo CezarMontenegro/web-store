@@ -4,6 +4,7 @@ export const Container = styled.header`
   display: flex;
   height: 50px;
   width: 100%;
+  min-width: 320px;
   justify-content: space-between;
   align-items: center;
   box-sizing: border-box;
@@ -134,5 +135,18 @@ export const Container = styled.header`
   }
 
   //mobile S
-  
+  @media (max-width: 370px) {
+    .left-menu {
+      width: 180px;
+    }
+
+    .nav-header {
+      width: 110px;
+      justify-content: space-around;
+    }
+
+    .nav-header i{
+      margin-left: 10px;
+    }
+  }
 `
