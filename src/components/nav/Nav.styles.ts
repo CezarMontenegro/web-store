@@ -1,8 +1,13 @@
 import styled from 'styled-components';
 
-export const Container = styled.nav`
+interface Props {
+  isNavShown: boolean;
+}
+
+export const Container = styled.nav<Props>`
   height: 100%;
   width: 250px;
+  min-width: 250px;
   padding-left: 10px;
   display: flex;
   flex-direction: column;
@@ -16,4 +21,12 @@ export const Container = styled.nav`
   p:hover {
     font-weight: bold;
   }
+
+  //tablet size
+  @media (max-width:768px) {
+    display: ${(props) => props.isNavShown ? '' : 'none'};
+    position: absolute;
+  }
+
+
 `

@@ -11,6 +11,7 @@ import { Container } from './Home.styles';
 
 function Home() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isNavShown, setIsNavShown] = useState<boolean>(false);
 
   const {
     getCategories,
@@ -20,11 +21,12 @@ function Home() {
     getCategories()
   },[])
 
+  console.log(isNavShown);
   return (
     <>
-      <Header setIsLoading={setIsLoading}/>
+      <Header setIsLoading={setIsLoading} setIsNavShown={setIsNavShown}/>
       <Container>
-        <Nav setIsLoading={setIsLoading}/>
+        <Nav setIsLoading={setIsLoading} isNavShown={isNavShown} setIsNavShown={setIsNavShown}/>
         <Main setIsLoading={setIsLoading} isLoading={isLoading}/>
       </Container>
       <Footer />

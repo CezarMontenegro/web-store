@@ -1,8 +1,10 @@
 import styled from 'styled-components';
 
-export const Container = styled.header`
+export const Container = styled.main`
   width: 100vw;
   height: 100vh;
+  min-width: 360px;
+
 
   header {
   display: flex;
@@ -42,7 +44,7 @@ export const Container = styled.header`
   }
 
   .cart-list {
-    width: 600px;
+    width: 90%;
     margin-top: 20px;
     margin-left: 20px;
     box-sizing: border-box;
@@ -76,7 +78,7 @@ export const Container = styled.header`
   }
 
   .thumb-container {
-    height: 100%;
+    /* height: 100%; */
     width: 100px;
     display: flex;
     justify-content: center;
@@ -89,7 +91,7 @@ export const Container = styled.header`
   }
 
   .title-container {
-    height: 100%;
+    /* height: 100%; */
     width: 200px;
     display: flex;
     justify-content: center;
@@ -98,7 +100,7 @@ export const Container = styled.header`
   }
 
   .qty-container {
-    height: 100%;
+    /* height: 100%; */
     width: 120px;
     display: flex;
     justify-content: space-evenly;
@@ -133,7 +135,7 @@ export const Container = styled.header`
   }
 
   .price-container {
-    height: 100%;
+    /* height: 100%; */
     width: 120px;
     display: flex;
     justify-content: center;
@@ -144,17 +146,48 @@ export const Container = styled.header`
   .total-price-container {
     margin-left: 20px;
     margin-top: 10px;
-    width: 600px;
+    width: 90%;
     height: 50px;
-
     display: flex;
     align-items: center;
     justify-content: space-between;
     font-weight: bold;
-    font-size: 24px
+    font-size: 24px;
   }
 
   .total-price-container div:last-child {
     margin-right: 20px;
+  }
+
+  @media (max-width: 625px) {
+    .product-container {
+      flex-wrap: wrap;
+      width: 350px;
+      height: 150px;
+    }
+
+    .trash-container {
+      display: none;
+    }
+
+    .total-price-container {
+      flex-direction: column;
+    }
+  }
+
+  @media (max-width: 425px) {
+    header .title h4 {
+      display: none;
+    }
+
+    .product-container {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 360px) {
+    .title-container {
+      width: 160px;
+    }
   }
 `

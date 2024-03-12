@@ -29,7 +29,6 @@ function Main({isLoading, setIsLoading} : Props) {
   const [isChecked, setIsChecked] = useState<boolean>(false);
   const [listOrderOption, setListOrderOption] = useState<ListOrderOptions>('relevance');
 
-  
   useEffect(() => {
     setUsableProductList(productList);
   }, [productList, listOrderOption]);
@@ -38,7 +37,7 @@ function Main({isLoading, setIsLoading} : Props) {
     setListOrderOption('relevance');
     setIsChecked(false);
     setIsLoading(false);
-  }, [productList])
+  }, [productList]);
 
   function sortProductListByPrice() {
     const options = {
@@ -75,7 +74,6 @@ function Main({isLoading, setIsLoading} : Props) {
     }
   }
   
-  console.log(productList)
   return (
     <Container>
       { isLoading && (
@@ -98,7 +96,7 @@ function Main({isLoading, setIsLoading} : Props) {
       {(usableProductList.length > 0 && !isLoading) && (
         <div className="main-container">
           <div className="info"> 
-            <div>{`Foram achados ${productList.length} produtos`}</div>
+            <div className="product-qty">{`Foram achados ${productList.length} produtos`}</div>
             <div className="filter-order-container">
               <div className="filter">
                 <p>Frete Grátis</p>
