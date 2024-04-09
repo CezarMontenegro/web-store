@@ -867,4 +867,4 @@ Error generating stack: `+o.message+`
   width: 100vw;
   background-color: #e7e7e7;
   font-family: Arial, Helvetica, sans-serif;
-`;function y1(){return w.jsx(g1,{children:w.jsxs(Cg,{children:[w.jsx(Ui,{path:"/",element:w.jsx(f1,{})}),w.jsx(Ui,{path:"/shoppingCart",element:w.jsx(p1,{})}),w.jsx(Ui,{path:"/productDetails/:id",element:w.jsx(m1,{})})]})})}Ml.createRoot(document.getElementById("root")).render(w.jsx(cn.StrictMode,{children:w.jsx(jg,{basename:"/",children:w.jsx(by,{children:w.jsx(Yy,{children:w.jsx(y1,{})})})})}));
+`;function y1(){return w.jsx(g1,{children:w.jsxs(Cg,{children:[w.jsx(Ui,{path:"/",element:w.jsx(f1,{})}),w.jsx(Ui,{path:"/shoppingCart",element:w.jsx(p1,{})}),w.jsx(Ui,{path:"/productDetails/:id",element:w.jsx(m1,{})})]})})}Ml.createRoot(document.getElementById("root")).render(w.jsx(cn.StrictMode,{children:w.jsx(jg,{children:w.jsx(by,{children:w.jsx(Yy,{children:w.jsx(y1,{})})})})}));
