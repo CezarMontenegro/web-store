@@ -1,30 +1,24 @@
-# React + TypeScript + Vite
+# Web Store
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este projeto é um frontend que utiliza a API do Mercado Livre para exibir produtos e detalhes de itens específicos.
 
-Currently, two official plugins are available:
+Para ver o Pomofocus funcionando acesse: https://cezarmontenegro.github.io/pomofocus-frontend/
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Funcionalidades
 
-## Expanding the ESLint configuration
+- Busca por produtos utilizando a API do Mercado Livre.
+- Exibição de detalhes de um produto específico, como título, preço e descrição.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Tecnologias utilizadas na aplicação
+![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
+![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+![Context-API](https://img.shields.io/badge/Context--Api-000000?style=for-the-badge&logo=react)
 
-- Configure the top-level `parserOptions` property like this:
+## Para rodar a aplicação
+  Instalando dependências:
+  
+    `npm install`
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+  Rodando aplicação:
+  
+    `npm start`
