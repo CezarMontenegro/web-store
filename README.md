@@ -2,7 +2,7 @@
 
 Este projeto é um frontend que utiliza a API do Mercado Livre para exibir produtos e detalhes de itens específicos.
 
-Para ver o Pomofocus funcionando acesse: https://cezarmontenegro.github.io/pomofocus-frontend/
+Para ver o Pomofocus funcionando acesse: https://cezarmontenegro.github.io/web-store
 
 ## Funcionalidades
 
